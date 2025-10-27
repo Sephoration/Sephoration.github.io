@@ -1,0 +1,238 @@
+// _sass/color_schemes/soft-dark.scss
+// Soft Dark Theme - 基于原有 dark 主题的柔和版本
+
+$color-scheme: dark;
+
+// ================================
+// 基础颜色变量 - 使用更柔和的色调
+// ================================
+
+// 主背景色 - 柔和的深灰，比原版稍浅
+$body-background-color: $grey-dk-250 !default; // 原版是 $grey-dk-300
+$content-background-color: $body-background-color !default;
+
+// 文本颜色 - 使用更柔和的浅灰色
+$body-heading-color: $grey-lt-100 !default; // 原版是 $grey-lt-000
+$body-text-color: $grey-lt-200 !default; // 原版是 $grey-lt-300
+
+// 链接颜色 - 柔和的蓝色
+$link-color: $blue-100 !default; // 原版是 $blue-000
+$link-color-hover: lighten($link-color, 10%) !default;
+$link-color-visited: $purple-100 !default;
+
+// ================================
+// 导航和侧边栏 - 更柔和的对比
+// ================================
+
+// 侧边栏颜色 - 比背景稍浅
+$sidebar-color: $grey-dk-250 !default; // 原版是 $grey-dk-300
+$nav-child-link-color: $grey-dk-100 !default; // 原版是 $grey-dk-000
+
+// 导航激活状态
+$nav-active-color: $blue-100 !default;
+$nav-active-background-color: rgba($blue-100, 0.1) !default;
+
+// ================================
+// 按钮和交互元素
+// ================================
+
+// 按钮颜色 - 更柔和的色调
+$base-button-color: $grey-dk-200 !default; // 原版是 $grey-dk-250
+$btn-primary-color: $blue-150 !default; // 原版是 $blue-200
+
+// ================================
+// 代码和语法高亮
+// ================================
+
+// 代码块背景 - 柔和的深色
+$code-background-color: #2a2d38 !default; // 比原版 #31343f 更柔和
+$code-linenumber-color: #c8ccd4 !default; // 比原版 #dee2f7 更柔和
+
+// ================================
+// 搜索和表格
+// ================================
+
+$search-background-color: $grey-dk-200 !default; // 原版是 $grey-dk-250
+$search-result-preview-color: $grey-dk-050 !default; // 原版是 $grey-dk-000
+
+$table-background-color: $grey-dk-200 !default; // 原版是 $grey-dk-250
+$feedback-color: darken($sidebar-color, 2%) !default; // 原版是 3%
+
+// ================================
+// 边框颜色 - 更柔和的边框
+// ================================
+
+$border-color: $grey-dk-150 !default; // 原版是 $grey-dk-200
+
+// ================================
+// 导入语法高亮主题
+// ================================
+
+@import "./vendor/OneDarkJekyll/syntax";
+
+// ================================
+// 自定义柔和样式增强
+// ================================
+
+// 导航链接悬停效果
+.nav-list .nav-list-item .nav-list-link {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: rgba($blue-100, 0.05);
+    color: $link-color-hover;
+  }
+  
+  &.active {
+    background-color: $nav-active-background-color;
+    color: $nav-active-color;
+    border-left: 3px solid $nav-active-color;
+  }
+}
+
+// 按钮柔和样式
+.btn {
+  transition: all 0.2s ease;
+  border: 1px solid $border-color;
+  
+  &:hover {
+    background-color: lighten($base-button-color, 5%);
+    border-color: lighten($border-color, 5%);
+    transform: translateY(-1px);
+  }
+  
+  &.btn-primary {
+    background: linear-gradient(135deg, $btn-primary-color 0%, darken($btn-primary-color, 10%) 100%);
+    border: none;
+    
+    &:hover {
+      background: linear-gradient(135deg, lighten($btn-primary-color, 5%) 0%, $btn-primary-color 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba($btn-primary-color, 0.3);
+    }
+  }
+}
+
+// 表格柔和样式
+table {
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  overflow: hidden;
+  
+  th {
+    background: linear-gradient(135deg, $table-background-color 0%, lighten($table-background-color, 3%) 100%);
+    border-bottom: 1px solid $border-color;
+    font-weight: 600;
+  }
+  
+  td {
+    border-bottom: 1px solid lighten($border-color, 2%);
+  }
+  
+  tr:hover {
+    background-color: lighten($table-background-color, 2%);
+  }
+}
+
+// 代码块柔和样式
+.highlight {
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  pre {
+    background-color: $code-background-color;
+  }
+}
+
+// 呼出框柔和样式
+.callout {
+  border: 1px solid;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// 搜索框柔和样式
+.search-input {
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    border-color: $link-color;
+    box-shadow: 0 0 0 3px rgba($link-color, 0.1);
+  }
+}
+
+// 滚动条柔和样式
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $sidebar-color;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lighten($sidebar-color, 10%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: lighten($sidebar-color, 15%);
+}
+
+// 选择文本颜色
+::selection {
+  background: rgba($blue-100, 0.3);
+  color: $body-heading-color;
+}
+
+::-moz-selection {
+  background: rgba($blue-100, 0.3);
+  color: $body-heading-color;
+}
+
+// 链接下划线柔和样式
+a {
+  text-decoration: none;
+  background-image: linear-gradient($link-color, $link-color);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0% 100%;
+  transition: background-size 0.2s ease, color 0.2s ease;
+  
+  &:hover {
+    background-size: 100% 1px;
+    color: $link-color-hover;
+  }
+}
+
+// 主内容区域渐变背景
+.main-content-wrap {
+  background: linear-gradient(135deg, $body-background-color 0%, darken($body-background-color, 1%) 100%);
+}
+
+// 侧边栏渐变
+.side-bar {
+  background: linear-gradient(135deg, $sidebar-color 0%, darken($sidebar-color, 2%) 100%);
+}
+
+// 响应式调整
+@media (min-width: 66.5rem) {
+  .side-bar {
+    border-right: 1px solid $border-color;
+  }
+}
+
+// 页脚柔和样式
+.site-footer {
+  border-top: 1px solid $border-color;
+  background: linear-gradient(135deg, $body-background-color 0%, darken($body-background-color, 2%) 100%);
+}
