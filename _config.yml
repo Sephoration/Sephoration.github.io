@@ -183,28 +183,24 @@ callouts:
 
 
 # ================================================================
-# 目录 ToC 设置
+# 目录 ToC [true or false]
 # ================================================================
-toc_enabled: true         # true or false [启用或禁用目录侧边/顶部面板]
+toc_enabled: true          # 启用或禁用目录侧边/顶部面板
 toc:
-  min_heading_level: 1    # 纳入目录的标题级别，默认2【1=<h1>，2=<h2>……】
+  min_heading_level: 1     # 纳入目录的标题级别，默认2【1=<h1>，2=<h2>……】
   max_heading_level: 6
-  ordered: false          # or true# 目录用有序列表（true）还是无序列表（false）
-  flat_toc: false         # or true# 是否把目录压扁成单级列表，true=单级，false=保留层级缩进
-  highlight_active: true  # or false # 是否在目录中高亮当前可视区域章节（需 JavaScript）
+  ordered: false           # 目录用有序列表（true）还是无序列表（false）
+  flat_toc: false          # 是否把目录压扁成单级列表，true=单级，false=保留层级缩进
+  highlight_active: true   # 是否在目录中高亮当前可视区域章节（需 JavaScript）
   highlight:
-    in_view: true         # true=高亮所有在视口内的章节；false=仅高亮第一个 
-    offset: 60            # 判定章节“进入视口”时距离顶部的像素偏移，留空则取视口正中
-  style: "float" # 目录面板样式：side=固定侧边float=浮动可关闭（默认），设为 float 时，双击侧边栏开关按钮可回到顶部
- # 'float' or 'side', additionally add any custom CSS classes to the panel, separated by spaces
-  title: "这是一个目录呀~"      # 目录面板标题，会显示在目录上方及移动端横幅
-  back_to_top: true # or false目录面板里是否显示“回到顶部”按钮，默认 true
-  # Display "Edit this page on GitHub" link in the ToC panel (requires configuring gh_edit_link). Default: false
-  gh_edit_link: false # or true目录面板里是否显示“在 GitHub 编辑此页”链接（需先配置 gh_edit_link）
-  # Accessibility text for the skip link to the ToC panel (requires JavaScript, optional, default: "Skip to the Table of Contents")
-  # skip_label: "Skip to the Table of Contents"
-  # Shortcut key to quick open the ToC panel (requires JavaScript, optional, default: t). Remove to disable keyboard shortcut.
-  # Uncomment one or multiple modifier key options below to set a key combination for opening the ToC panel
+    in_view: true          # true=高亮所有在视口内的章节；false=仅高亮第一个 
+    offset: 60             # 判定章节“进入视口”时距离顶部的像素偏移，留空则取视口正中
+  # 目录面板样式：side=固定侧边，float=浮动可关闭（默认），设为 float 时，双击侧边栏开关按钮可回到顶部
+  # 'float' 或 'side'，此外还可以给面板添加任意自定义 CSS 类名，多个类名用空格分隔。
+  style: "float"          
+  title: "这是一个目录呀~"  # 目录面板标题，会显示在目录上方及移动端横幅
+  back_to_top: true        # 目录面板里是否显示“回到顶部”按钮，默认 true
+  gh_edit_link: false      # 目录面板里是否显示“在 GitHub 编辑此页”链接（需先配置 gh_edit_link）
   # 跳过到目录面板的辅助功能链接文字（需 JavaScript）
   # skip_label: "Skip to the Table of Contents"
   # 快速打开目录面板的快捷键（需 JavaScript），默认 t；删除整行则禁用
@@ -213,9 +209,7 @@ toc:
     # ctrl_meta: false # or true => press and hold Ctrl on Windows/Linux or Command on macOS + key to open the ToC panel
     # alt: false # or true => press and hold Alt on Windows/Linux or Option on macOS + key to open the ToC panel
     # shift: false # or true => press and hold Shift + key to open the ToC panel
-  # Feel free to add extra jekyll-toc settings, see _includes/vendor/toc.html
-  # 以下修饰键可任选组合，true=启用，false=禁用
-  # 如需更多 jekyll-toc 设置，见 _includes/vendor/toc.html
+    # 如需更多 jekyll-toc 设置，见 _includes/vendor/toc.html
 
 
 
