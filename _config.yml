@@ -8,7 +8,7 @@
 #以下字段用于个性化你的新站点。在 HTML 模板中，你会看到它们通过 {{ site.title }}、{{ site.github_repo }} 等方式被调用。
 #你也可以创建任何自定义变量，例如 {{ site.myvariable }}，即可在模板中随处使用。
 
-theme: just-the-docs
+
 title: 阿四的小网站
 description: 计算机的学习记录  #搜索显示名字
 baseurl: ""      #若部署到子目录需写
@@ -212,8 +212,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-include-cache
   - jekyll-sitemap
-  - jekyll-feed
-  - jekyll-sitemap
+
 
 kramdown:                         #Jekyll 默认用 kramdown 解析 Markdown
   syntax_highlighter_opts:        #控制代码块高亮
