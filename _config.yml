@@ -1,23 +1,18 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole site, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing these this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
+#欢迎来到 Jekyll！
+#此配置文件用于设定影响整个站点的参数，这些值通常一次性设置，之后很少改动。
+#如果你发现自己经常编辑本文件，请考虑使用 Jekyll 的“数据文件”功能来存放需要频繁更新的数据。
+#由于技术原因，使用 jekyll serve 时不会自动重载本文件。
+#若修改了此处内容，请重新启动服务器进程。
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: Just the Docs
-description: A Jekyll theme for documentation
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://just-the-docs.com" # the base hostname & protocol for your site, e.g. http://example.com
-repository: just-the-docs/just-the-docs # for github-metadata
+#站点设置
+#以下字段用于个性化你的新站点。在 HTML 模板中，你会看到它们通过 {{ site.title }}、{{ site.github_repo }} 等方式被调用。
+#你也可以创建任何自定义变量，例如 {{ site.myvariable }}，即可在模板中随处使用。
+
+title: 阿四的小网站
+description: 计算机的学习记录  #搜索显示名字
+baseurl: ""      #若部署到子目录需写
+url: "https://github.com/Sephoration" # the base hostname & protocol for your site, e.g. http://example.com
+repository: https://github.com/Sephoration/Sephoration.github.io # for github-metadata
 
 permalink: pretty
 
@@ -26,39 +21,18 @@ defaults:
       path: "docs" # an empty string here means all files in the project
       type: "pages"
     values:
-      layout: "default"
+      layout: "minimal"
 
-exclude:
-  # from https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml:
-  - .sass-cache/
-  - .jekyll-cache/
-  - gemfiles/
-  - Gemfile
-  - Gemfile.lock
-  - node_modules/
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
-  # specific to the theme website:
-  - bin/
-  - lib/
-  - "*.gemspec"
-  - "*.gem"
-  - LICENSE.txt
-  - package.json
-  - package-lock.json
-  - Rakefile
-  - README.md
-  - CODE_OF_CONDUCT.md
-  - docker-compose.yml
-  - Dockerfile
-  # theme test code
-  - fixtures/
 
-# Set a path/url to a logo that will be displayed instead of the title
-#logo: "/assets/images/just-the-docs.png"
 
+# 站点 Logo
+# 如需显示图片 Logo（而非文字标题），去掉注释并填写路径
+# logo: /assets/images/2 (3).jpg
+
+
+# ================================================================
+# 搜索设置
+# ================================================================
 # Enable or disable the site search
 # Supports true (default) or false
 search_enabled: true
@@ -88,7 +62,10 @@ search:
   # Focus the search input by pressing `ctrl + focus_shortcut_key` (or `cmd + focus_shortcut_key` on macOS)
   focus_shortcut_key: "k"
 
-# For copy button on code
+
+
+
+# 代码块右上角「复制」按钮
 enable_copy_code_button: true
 
 # By default, consuming the theme as a gem leaves mermaid disabled; it is opt-in
@@ -105,57 +82,60 @@ enable_copy_code_button: true
   # path: "/assets/js/mermaid.min.js"
   # Note: copy both `mermaid.esm.min.mjs` (v10+) or `mermaid.min.js` (<v10) and the associated `.map` file from the specified version of `mermaid/dist` to `/assets/js/`.
 
-# Enable or disable heading anchors
+#标题锚点，h1-h6 左侧出现可点击的符号
 heading_anchors: true
 
-# Aux links for the upper right navigation
+
+# ===== 右上角辅助链接 =====
 aux_links:
-  "Just the Docs on GitHub":
-    - "https://github.com/just-the-docs/just-the-docs"
+  "GitHub 主页":
+    - "https://github.com/Sephoration"
 
-# Makes Aux links open in a new tab. Default is false
-aux_links_new_tab: false
 
-# Enable or disable the side/mobile menu globally
-# Nav menu can also be selectively enabled or disabled using page variables or the minimal layout
-nav_enabled: true
+aux_links_new_tab: false  #是否在新标签页打开辅助链接
+
+nav_enabled: true  # 侧边栏/移动端导航总开关
 
 # Sort order for navigation links
 # nav_sort: case_insensitive # default, equivalent to nil
-nav_sort: case_sensitive # Capital letters sorted before lowercase
+nav_sort: case_sensitive # Capital letters sorted before lowercase# 大写字母排在小写前面；用 case_insensitive 忽略大小写
 
-# External navigation links
+# External navigation links # 底部「外部导航」链接（出现在侧边栏最下方）
 nav_external_links:
   - title: Just the Docs on GitHub
     url: https://github.com/just-the-docs/just-the-docs
 
 # Show navigation error report
 nav_error_report: true # default is false/nil.
+# 导航错误报告（找不到页面时给出提示）# 开发阶段打开，上线后可 false
 
+
+# Liquid 引擎严格模式（开发时开启，提前暴露变量/过滤器错误）
 liquid:
   error_mode: strict
   strict_filters: true
 
-# Footer content
-# appears at the bottom of every page's main content
 
-# Back to top link
+
+# ================================================================
+# 页脚内容（每页主体底部出现）
+# ================================================================
+# footer_content 可写任意 HTML，留空则不显示额外文字
 back_to_top: true
-back_to_top_text: "Back to top"
-
-footer_content: 'Copyright &copy; 2017-2020 Patrick Marsceill. Distributed by an <a href="https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt">MIT license.</a> <a href="https://www.netlify.com/">This site is powered by Netlify.</a>'
-
+back_to_top_text: "回到顶部"
+footer_content: '一一得一，十十得百，百百千千，千千万万。——《增广贤文》'
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
 last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
-
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
 gh_edit_link_text: "Edit this page on GitHub"
-gh_edit_repository: "https://github.com/just-the-docs/just-the-docs" # the github URL for your repo
+gh_edit_repository: "https://github.com/Sephoration/Sephoration.github.io" # the repository that your docs are stored in
 gh_edit_branch: "main" # the branch that your docs is served from
-# gh_edit_source: docs # the source that your files originate from
+gh_edit_source: docs # the source that your files originate from
 gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
+
+
 
 
 # Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
@@ -213,7 +193,6 @@ toc:
 
 
 
-
 # ================================================================
 # 谷歌分析跟踪（可选），用于网站流量统计
 # ================================================================
@@ -222,7 +201,6 @@ toc:
 # Note: the main Just the Docs site does *not* use Google Analytics.
 # ga_tracking: UA-2709176-10,G-5FG1HLH3XQ
 # ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true/nil by default)
-
 
 
 
@@ -253,4 +231,30 @@ sass:
   quiet_deps: true # https://github.com/just-the-docs/just-the-docs/issues/1541
   silence_deprecations: ['import'] # https://github.com/just-the-docs/just-the-docs/issues/1607
 
-
+exclude:
+  # from https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  # specific to the theme website:
+  - bin/
+  - lib/
+  - "*.gemspec"
+  - "*.gem"
+  - LICENSE.txt
+  - package.json
+  - package-lock.json
+  - Rakefile
+  - README.md
+  - CODE_OF_CONDUCT.md
+  - docker-compose.yml
+  - Dockerfile
+  # theme test code
+  - fixtures/
