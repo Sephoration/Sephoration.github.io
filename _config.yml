@@ -179,60 +179,71 @@ callouts:
     title: Warning
     color: red
 
-# Enable or disable the Table of Contents (ToC) side/top panel
-toc_enabled: true # or false
+
+
+
+# ================================================================
+# 目录 ToC 设置
+# ================================================================
+toc_enabled: true         # true or false [启用或禁用目录侧边/顶部面板]
 toc:
-  # Minimum heading level to include in the ToC. Default: 2
-  min_heading_level: 2
-  # Maximum heading level to include in the ToC. Default: 6
+  min_heading_level: 1    # 纳入目录的标题级别，默认2【1=<h1>，2=<h2>……】
   max_heading_level: 6
-  # Display the ToC as an ordered list (true) or unordered list (false)
-  ordered: false # or true
-  # Display the ToC as a single level list. Supports true or false (default)
-  flat_toc: false # or true
-  # Highlight the current section(s) in view in the ToC (requires JavaScript)
-  highlight_active: true # or false
+  ordered: false          # or true# 目录用有序列表（true）还是无序列表（false）
+  flat_toc: false         # or true# 是否把目录压扁成单级列表，true=单级，false=保留层级缩进
+  highlight_active: true  # or false # 是否在目录中高亮当前可视区域章节（需 JavaScript）
   highlight:
-    # Highlight all sections in view under [offset] (true), or only the first section under [offset] when the previous heading is out of view (false)
-    in_view: true # or false
-    # Pixel offset from the top of the viewport to determine when a section is considered "in view". Remove to set as middle of the viewport.
-    offset: 60
-  # Display the ToC sidebar as a floating panel (default: float) or as a clipped side panel (side) on small desktops and tablets
-  # tip: setting 'float' allows double-clicking the sidebar opener button to scroll up
-  style: "float" # 'float' or 'side', additionally add any custom CSS classes to the panel, separated by spaces
-  # Title of the side/top panel, appear above the ToC, top banner on mobile and in accessibility text
-  title: "Table of Contents"
-  # Back to top button in the ToC panel. Default: true
-  back_to_top: true # or false
-  # back_to_top_text: "Back to top"
+    in_view: true         # true=高亮所有在视口内的章节；false=仅高亮第一个 
+    offset: 60            # 判定章节“进入视口”时距离顶部的像素偏移，留空则取视口正中
+  style: "float" # 目录面板样式：side=固定侧边float=浮动可关闭（默认），设为 float 时，双击侧边栏开关按钮可回到顶部
+ # 'float' or 'side', additionally add any custom CSS classes to the panel, separated by spaces
+  title: "这是一个目录呀~"      # 目录面板标题，会显示在目录上方及移动端横幅
+  back_to_top: true # or false目录面板里是否显示“回到顶部”按钮，默认 true
   # Display "Edit this page on GitHub" link in the ToC panel (requires configuring gh_edit_link). Default: false
-  gh_edit_link: false # or true
+  gh_edit_link: false # or true目录面板里是否显示“在 GitHub 编辑此页”链接（需先配置 gh_edit_link）
   # Accessibility text for the skip link to the ToC panel (requires JavaScript, optional, default: "Skip to the Table of Contents")
   # skip_label: "Skip to the Table of Contents"
   # Shortcut key to quick open the ToC panel (requires JavaScript, optional, default: t). Remove to disable keyboard shortcut.
   # Uncomment one or multiple modifier key options below to set a key combination for opening the ToC panel
+  # 跳过到目录面板的辅助功能链接文字（需 JavaScript）
+  # skip_label: "Skip to the Table of Contents"
+  # 快速打开目录面板的快捷键（需 JavaScript），默认 t；删除整行则禁用
   shortcut:
     key: "t" # or any other key you prefer, remove this option to set 't' as the default
     # ctrl_meta: false # or true => press and hold Ctrl on Windows/Linux or Command on macOS + key to open the ToC panel
     # alt: false # or true => press and hold Alt on Windows/Linux or Option on macOS + key to open the ToC panel
     # shift: false # or true => press and hold Shift + key to open the ToC panel
   # Feel free to add extra jekyll-toc settings, see _includes/vendor/toc.html
+  # 以下修饰键可任选组合，true=启用，false=禁用
+  # 如需更多 jekyll-toc 设置，见 _includes/vendor/toc.html
 
+
+
+
+# ================================================================
+# 谷歌分析跟踪（可选），用于网站流量统计
+# ================================================================
 # Google Analytics Tracking (optional)
 # Supports a CSV of tracking ID strings (eg. "UA-1234567-89,G-1AB234CDE5")
 # Note: the main Just the Docs site does *not* use Google Analytics.
 # ga_tracking: UA-2709176-10,G-5FG1HLH3XQ
 # ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true/nil by default)
 
+
+
+
+# ================================================================
+# 优化设置
+# ================================================================
 plugins:
   - jekyll-seo-tag
   - jekyll-include-cache
   - jekyll-sitemap
 
-kramdown:
-  syntax_highlighter_opts:
+kramdown:                         #Jekyll 默认用 kramdown 解析 Markdown
+  syntax_highlighter_opts:        #控制代码块高亮
     block:
-      line_numbers: false
+      line_numbers: false         #代码块不显示行号 false/true
 
 compress_html:
   clippings: all
