@@ -1,10 +1,9 @@
-# 重新创建工作流文件
 @'
-name: Deploy Hugo to Pages
+name: Deploy Hugo Site
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -32,7 +31,7 @@ jobs:
           hugo-version: "0.128.0"
           extended: true
 
-      - name: Build
+      - name: Build with Hugo
         run: hugo --minify --baseURL "https://Sephoration.github.io/"
 
       - name: Upload artifact
@@ -50,4 +49,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-'@ | Out-File -FilePath .github\workflows\hugo.yml -Encoding UTF8 -Force
+'@ | Out-File -FilePath .github\workflows\hugo.yml -Encoding UTF8
