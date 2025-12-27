@@ -1,0 +1,13 @@
+theme = "FixIt"  
+defaultContentLanguage = "zh-cn"  
+
+title = "我的 Hugo 博客"
+
+[markup]
+_merge = "shallow"
+
+[outputs]
+_merge = "shallow"
+
+[taxonomies]
+_merge = "shallow"
