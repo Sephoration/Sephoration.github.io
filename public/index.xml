@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>我的 Hugo 博客</title>
-    <link>//localhost:1313/</link>
+    <link>http://localhost:1313/</link>
     <description>我的 Hugo 博客</description>
     <generator>Hugo 0.153.2 &amp; FixIt v0.4.0-alpha.3-20251225101113-8ffb9a95</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 27 Dec 2025 17:15:16 +0800</lastBuildDate>
-    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Feb 2023 20:14:22 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My First Post</title>
-      <link>//localhost:1313/posts/583bc6c/</link>
-      <pubDate>Sat, 27 Dec 2025 17:15:16 +0800</pubDate>
-      <guid>//localhost:1313/posts/583bc6c/</guid>
-      <category domain="//localhost:1313/categories/draft/">Draft</category>
-      <description>&lt;p&gt;hhhhhh&#xA;hello world!&lt;/p&gt;</description>
+      <link>http://localhost:1313/posts/first_post/</link>
+      <pubDate>Mon, 20 Feb 2023 20:14:22 +0800</pubDate>
+      <guid>http://localhost:1313/posts/first_post/</guid>
+      <category domain="http://localhost:1313/categories/blog/">Blog</category>
+      <description>&lt;p&gt;A blog (a truncation of &amp;ldquo;weblog&amp;rdquo;) is an informational website published on the World Wide Web consisting of discrete, often informal diary-style text entries (posts). Posts are typically displayed in reverse chronological order so that the most recent post appears first, at the top of the web page. Until 2009, blogs were usually the work of a single individual,[citation needed] occasionally of a small group, and often covered a single subject or topic. In the 2010s, &amp;ldquo;multi-author blogs&amp;rdquo; (MABs) emerged, featuring the writing of multiple authors and sometimes professionally edited. MABs from newspapers, other media outlets, universities, think tanks, advocacy groups, and similar institutions account for an increasing quantity of blog traffic. The rise of Twitter and other &amp;ldquo;microblogging&amp;rdquo; systems helps integrate MABs and single-author blogs into the news media. Blog can also be used as a verb, meaning to maintain or add content to a blog.&lt;/p&gt;&#xA;</description>
     </item>
   </channel>
 </rss>
