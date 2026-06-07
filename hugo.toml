@@ -60,7 +60,7 @@ parent = ""
 pre = ""
 # you can add extra information after the name (HTML format is supported), such as icons
 post = ""
-name = "归档"
+name = "文章"
 url = "/archives/"
 # title will be shown when you hover on this menu link
 title = ""
@@ -80,43 +80,17 @@ type = ""
 divided = false
 
 [[menu.main]]
-identifier = "categories"
+identifier = "about"
 parent = ""
 pre = ""
 post = ""
-name = "分类"
-url = "/categories/"
-title = ""
-weight = 3
-
-[menu.main.params]
-icon = "fa-solid fa-folder-tree"
-
-[[menu.main]]
-identifier = "timeline"
-parent = ""
-pre = ""
-post = ""
-name = "时间线"
-url = "/timeline/"
+name = "个人介绍"
+url = "/about/"
 title = ""
 weight = 2
 
 [menu.main.params]
-icon = "fa-solid fa-clock-rotate-left"
-
-[[menu.main]]
-identifier = "tags"
-parent = ""
-pre = ""
-post = ""
-name = "标签"
-url = "/tags/"
-title = ""
-weight = 4
-
-[menu.main.params]
-icon = "fa-solid fa-tags"
+icon = "fa-solid fa-user"
 
 # -------------------------------------------------------------------------------------
 # Related content Configuration
@@ -171,6 +145,14 @@ weight = 80
 [[module.mounts]]
 source = "themes/FixIt/layouts/_shortcodes"
 target = "layouts/shortcodes"
+
+[[module.mounts]]
+source = "themes/FixIt/layouts/_partials"
+target = "layouts/partials"
+
+[[module.mounts]]
+source = "themes/FixIt/layouts/_markup"
+target = "layouts/_markup"
 
 [module.hugoVersion]
 extended = true
@@ -410,9 +392,6 @@ term = [
 
 [taxonomies]
 _merge = "shallow"
-category = "categories"
-tag = "tags"
-collection = "collections"
 
 # -------------------------------------------------------------------------------------
 # Theme Core Configuration
@@ -595,7 +574,7 @@ enable = true
 # whether to show copyright info
 copyright = true
 # whether to show the author
-author = true
+author = false
 # Site creation year
 since = "2025"
 # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
@@ -603,13 +582,11 @@ gov = ""
 # ICP info only in China (HTML format is supported)
 icp = ""
 # license info (HTML format is supported)
-license = ""
+license = "Stay hungry, stay foolish."
 
 # FixIt 0.3.0 | NEW whether to show Hugo and theme info
 [params.footer.powered]
-enable = true
-hugoLogo = true
-themeLogo = true
+enable = false
 
 # FixIt 0.2.17 | CHANGED Site creation time
 [params.footer.siteTime]
@@ -706,7 +683,7 @@ disclaimer = ""
 
 # Home page posts
 [params.home.posts]
-enable = true
+enable = false
 # special amount of posts in each home posts page
 paginate = 6
 
@@ -800,7 +777,7 @@ Credly = ""
 Bluesky = ""
 Phone = ""
 Email = ""
-RSS = true
+RSS = false
 # custom social links like the following
 # [params.social.twitter]
 #   id = "lruihao"
@@ -1208,7 +1185,7 @@ fraction = true
 # whether to enable the fontawesome extended syntax
 fontawesome = true
 # license info (HTML format is supported)
-license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
+license = ""
 # whether to show link to Raw Markdown content of the post
 linkToMarkdown = true
 # FixIt 0.3.0 | NEW whether to show link to view source code of the post
@@ -1218,7 +1195,7 @@ linkToEdit = true
 # FixIt 0.3.0 | NEW whether to show link to report issue for the post
 linkToReport = true
 # FixIt 0.3.20 | NEW whether to show link to view the post in VSCode
-linkToVscode = true
+linkToVscode = false
 # FixIt 0.3.10 | CHANGED Page style ["narrow", "normal", "wide", ...]
 pageStyle = "wide"
 # FixIt 0.2.17 | CHANGED Auto Bookmark Support
@@ -1398,22 +1375,7 @@ mode = "static"
 
 # Social share links in post page
 [params.page.share]
-enable = true
-Twitter = true
-Facebook = true
-Linkedin = false
-Whatsapp = false
-Pinterest = false
-Tumblr = false
-HackerNews = false
-Reddit = false
-VK = false
-Buffer = false
-Xing = false
-Line = false
-Instapaper = false
-Pocket = false
-Flipboard = false
+enable = false
 Weibo = true
 Myspace = false
 Blogger = false

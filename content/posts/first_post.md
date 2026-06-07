@@ -2,11 +2,6 @@
 title: "双边协同 · 价值共生"
 date: 2025-01-01T00:00:00+08:00
 draft: false
-categories:
-  - 思考
-tags:
-  - 协同
-  - 价值
 ---
 
 ## 前言
