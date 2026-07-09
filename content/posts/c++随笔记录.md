@@ -16,6 +16,22 @@ draft: false
 ---
 
 
+```js { type="echarts" title="月度销量" }
+{
+  xAxis: {
+    data: ["1月", "2月", "3月", "4月"]
+  },
+  yAxis: {},
+  series: [
+    {
+      name: "销量",
+      type: "bar",
+      data: [120, 200, 150, 80]
+    }
+  ]
+}
+```
+
 
 ### 头文件与源文件
 
