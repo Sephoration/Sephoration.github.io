@@ -156,6 +156,10 @@ source = "themes/FixIt/layouts/_shortcodes"
 target = "layouts/shortcodes"
 
 [[module.mounts]]
+source = "layouts/partials"
+target = "layouts/partials"
+
+[[module.mounts]]
 source = "themes/FixIt/layouts/_partials"
 target = "layouts/partials"
 
