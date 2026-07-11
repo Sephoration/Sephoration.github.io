@@ -31,6 +31,9 @@ jobs:
           hugo-version: "0.162.0"
           extended: true
 
+      - name: Install Dart Sass
+        run: npm install -g sass
+
       - name: Build with Hugo
         run: hugo --minify --baseURL "https://Sephoration.github.io/"
 
