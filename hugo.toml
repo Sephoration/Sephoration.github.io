@@ -935,7 +935,7 @@ lazy_load = true
 
 [params.library.js]
 # someJavascript = "some.js"
-flyfish = "/js/flyfish.js"
+# someJavascript = "some.js"
 
 # public Git repository information only then enableGitInfo is true
 [params.git_info]
