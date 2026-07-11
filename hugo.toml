@@ -2,7 +2,7 @@
 # It's recommended to use Alternate Theme Config to configure FixIt
 # Modifying this file may result in merge conflict
 # There are currently some restrictions to what a theme component can configure:
-# params, menu, outputformats and mediatypes
+# params, menu(s), outputformats and mediatypes
 # =====================================================================================
 
 # -------------------------------------------------------------------------------------
@@ -12,7 +12,7 @@
 
 # website title
 title = "Sephoration"
-# Hostname (and path) to the root
+# hostname (and path) to the root
 baseURL = "https://Sephoration.github.io/"
 # theme list
 theme = ["FixIt"] # enable in your site config file
@@ -38,6 +38,20 @@ enableEmoji = true
 # mainSections = ["posts"]
 
 # -------------------------------------------------------------------------------------
+# Front Matter Configuration
+# See: https://gohugo.io/configuration/front-matter/
+# -------------------------------------------------------------------------------------
+
+[frontmatter]
+_merge = "shallow"
+lastmod = [
+  "lastmod",
+  ":git",
+  ":fileModTime",
+  ":default",
+]
+
+# -------------------------------------------------------------------------------------
 # Imaging Configuration
 # See: https://gohugo.io/configuration/imaging/
 # -------------------------------------------------------------------------------------
@@ -51,35 +65,26 @@ quality = 75
 # See: https://fixit.lruihao.cn/documentation/basics/#menu-configuration
 # -------------------------------------------------------------------------------------
 
-[menu]
+[menus]
 
-[[menu.main]]
+[[menus.main]]
 identifier = "archives"
 parent = ""
-# you can add extra information before the name (HTML format is supported), such as icons
 pre = ""
-# you can add extra information after the name (HTML format is supported), such as icons
 post = ""
 name = "文章"
 url = "/archives/"
-# title will be shown when you hover on this menu link
 title = ""
 weight = 1
 
-# FixIt 0.2.14 | NEW add user-defined content to menu items
-[menu.main.params]
-# add css class to a specific menu item
+[menus.main.params]
 class = ""
-# whether set as a draft menu item whose function is similar to a draft post/page
 draft = false
-# FixIt 0.2.16 | NEW add fontawesome icon to a specific menu item
 icon = "fa-solid fa-archive"
-# FixIt 0.2.16 | NEW set menu item type, optional values: ["mobile", "desktop"]
 type = ""
-# FixIt 0.3.9 | NEW whether to show the submenu item divider line
 divided = false
 
-[[menu.main]]
+[[menus.main]]
 identifier = "about"
 parent = ""
 pre = ""
@@ -89,7 +94,7 @@ url = "/about/"
 title = ""
 weight = 2
 
-[menu.main.params]
+[menus.main.params]
 icon = "fa-solid fa-user"
 
 # -------------------------------------------------------------------------------------
@@ -156,7 +161,7 @@ target = "layouts/_markup"
 
 [module.hugoVersion]
 extended = true
-min = "0.147.7"
+min = "0.161.0"
 
 # -------------------------------------------------------------------------------------
 # Markup Configuration
@@ -178,7 +183,7 @@ guessSyntax = true
 lineNos = true
 lineNumbersInTable = true
 
-# Goldmark is from Hugo 0.60 the default library used for Markdown
+# goldmark is from Hugo 0.60 the default library used for Markdown
 # See: https://gohugo.io/configuration/markup/#goldmark
 [markup.goldmark]
 duplicateResourceFiles = false
@@ -295,9 +300,9 @@ privacyEnhanced = true
 # See: https://gohugo.io/configuration/media-types/
 # -------------------------------------------------------------------------------------
 
-[mediaTypes]
+# [mediaTypes]
 # [mediaTypes."application/feed+json"]
-# suffixes = ["json"]
+# suffixes = [ "json" ]
 
 # -------------------------------------------------------------------------------------
 # Output Format Configuration
@@ -306,7 +311,7 @@ privacyEnhanced = true
 
 [outputFormats]
 
-# FixIt 0.3.0 | NEW Options to make output /archives/index.html file
+# Options to make output /archives/index.html file
 [outputFormats.archives]
 path = "archives"
 baseName = "index"
@@ -316,7 +321,7 @@ isHTML = true
 permalinkable = true
 notAlternative = true
 
-# FixIt 0.3.0 | NEW Options to make output /offline/index.html file
+# Options to make output /offline/index.html file
 [outputFormats.offline]
 path = "offline"
 baseName = "index"
@@ -326,7 +331,17 @@ isHTML = true
 permalinkable = true
 notAlternative = true
 
-# FixIt 0.3.0 | NEW Options to make output readme.md file
+# Options to make output /link/index.html file
+[outputFormats.link]
+path = "link"
+baseName = "index"
+mediaType = "text/html"
+isPlainText = false
+isHTML = true
+permalinkable = true
+notAlternative = true
+
+# Options to make output readme.md file
 [outputFormats.readme]
 baseName = "readme"
 mediaType = "text/markdown"
@@ -334,7 +349,7 @@ isPlainText = true
 isHTML = false
 notAlternative = true
 
-# FixIt 0.3.0 | CHANGED Options to make output baidu_urls.txt file
+# Options to make output baidu_urls.txt file
 [outputFormats.baidu_urls]
 baseName = "baidu_urls"
 mediaType = "text/plain"
@@ -342,7 +357,7 @@ isPlainText = true
 isHTML = false
 notAlternative = true
 
-# FixIt 0.3.10 | NEW Options to make output search.json file
+# Options to make output search.json file
 [outputFormats.search]
 baseName = "search"
 mediaType = "application/json"
@@ -351,13 +366,21 @@ isPlainText = true
 isHTML = false
 permalinkable = true
 
+# Options to make output site.webmanifest file
+[outputFormats.manifest]
+baseName = "site"
+mediaType = "application/manifest+json"
+rel = "manifest"
+isPlainText = true
+isHTML = false
+
 # -------------------------------------------------------------------------------------
 # Output Configuration
 # See: https://gohugo.io/configuration/outputs/
 # -------------------------------------------------------------------------------------
 
-# Options to make hugo output files, the optional values are below:
-# home = ["html", "rss", "archives", "offline", "readme", "baidu_urls", "search"]
+# options to make hugo output files, the optional values are below:
+# home = ["html", "rss", "archives", "search", "offline", "manifest", "link", "readme", "baidu_urls"]
 # page = ["html", "markdown"]
 # section = ["html", "rss"]
 # taxonomy = ["html"]
@@ -368,8 +391,10 @@ home = [
   "html",
   "rss",
   "archives",
+  "search",
   "offline",
-  "search"
+  "manifest",
+  "link"
 ]
 page = [
   "html",
@@ -392,52 +417,97 @@ term = [
 
 [taxonomies]
 _merge = "shallow"
+category = "categories"
+tag = "tags"
+collection = "collections"
 
 # -------------------------------------------------------------------------------------
 # Theme Core Configuration
+# Two types of params:
+#   1. Site-level params — apply to the entire site, can NOT be overridden per-page.
+#   2. Page-level params — can be overridden per-page via page front matter.
+#
 # See: https://fixit.lruihao.cn/documentation/basics/#theme-configuration
 # -------------------------------------------------------------------------------------
 
 [params]
-# FixIt 0.2.15 | CHANGED FixIt theme version
-version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
+# FixIt theme version
+version = "1.0.X" # e.g. "0.4.X", "0.4.5", "v1.0.0" etc.
 # site description
 description = "Eric Sephoration 的个人博客，分享技术与生活"
 # site keywords
 keywords = ["blog", "技术博客", "Sephoration", "Eric Sephoration"]
 # site default theme ["light", "dark", "auto"]
-defaultTheme = "auto"
+default_theme = "auto"
 # which hash function used for SRI, when empty, no SRI is used
 # ["sha256", "sha384", "sha512", "md5"]
 fingerprint = ""
-# NEW date format
-dateFormat = "2006-01-02"
+# date format
+date_format = "2006-01-02"
 # website images for Open Graph and Twitter Cards
 images = []
-# FixIt 0.2.12 | NEW enable PWA
-enablePWA = false
-# FixIt 0.2.14 | NEW whether to add external Icon for external links automatically
-externalIcon = false
-# FixIt 0.3.13 | NEW whether to capitalize titles
-capitalizeTitles = true
-# FixIt 0.3.0 | NEW whether to add site title to the title of every page
-# remember to set up your site title in `hugo.toml` (e.g. title = "title")
-withSiteTitle = true
-# FixIt 0.3.0 | NEW title delimiter when the site title is be added to the title of every page
-titleDelimiter = "-"
-# FixIt 0.3.0 | NEW whether to add site subtitle to the title of index page
-# remember to set up your site subtitle by `params.header.subtitle.name`
-indexWithSubtitle = false
-# FixIt 0.3.13 | NEW whether to show summary in plain text
-summaryPlainify = false
-# FixIt 0.4.0 | NEW whether to enable merging missing translations from other languages
-# when set to true, missing translations from other languages will be merged and displayed
-# default is false for better performance, especially for single-language sites
-# set to true if your site has multiple languages and you want to show all content
-enableTranslationMerge = false
-# FixIt 0.2.14 | NEW FixIt will, by default, inject a theme meta tag in the HTML head on the home page only.
-# You can turn it off, but we would really appreciate if you don’t, as this is a good way to watch FixIt's popularity on the rise.
-disableThemeInject = false
+# whether to add site title to the title of every page
+with_site_title = true
+# title delimiter when the site title is be added to the title of every page
+title_delimiter = "-"
+# whether to add site subtitle to the title of index page
+index_with_subtitle = false
+# whether to enable merging missing translations from other languages
+enable_translation_merge = false
+# whether to enable tooltip replacement for elements with title attribute, such as footnote references
+tooltip = true
+# FixIt will, by default, inject a theme meta tag in the HTML head on the home page only.
+disable_theme_inject = false
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Page-level params
+# All params and sections below can be used in page front matter to override per-page.
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# whether to capitalize titles
+capitalize_titles = true
+# whether to show summary in plain text
+summary_plainify = false
+# whether to enable the author's avatar of the post
+author_avatar = true
+# whether to hide a page from home page
+hidden_from_home_page = false
+# whether to hide a page from search results
+hidden_from_search = false
+# whether to hide a page from related posts
+hidden_from_related = false
+# whether to hide a page from RSS, Atom and JSON feed
+hidden_from_feed = false
+# whether to enable twemoji
+twemoji = false
+# whether to enable lightgallery
+lightgallery = "force"
+# whether to enable the ruby extended syntax
+ruby = true
+# whether to enable the fraction extended syntax
+fraction = true
+# whether to enable the fontawesome extended syntax
+fontawesome = true
+# license info (HTML format is supported)
+license = ""
+# Page style ["narrow", "normal", "wide", ...]
+page_style = "wide"
+# Auto Bookmark Support
+auto_bookmark = false
+# whether to show the last modified time
+show_lastmod = true
+# whether to enable wordCount
+word_count = true
+# whether to enable readingTime
+reading_time = true
+# whether to enable instant.page
+instant_page = false
+# whether to enable collection list at the sidebar
+collection_list = false
+# whether to enable collection navigation at the end of the post
+collection_navigation = false
+# end of post flag
+end_flag = ""
 
 # Author Configuration
 [params.author]
@@ -446,158 +516,560 @@ email = ""
 link = ""
 avatar = ""
 
-# FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
-[params.gitInfo]
-# e.g. "https://github.com/hugo-fixit/docs"
+# Link config
+[params.link]
+# whether to add external Icon for external links automatically
+external_icon = false
+
+# External link guard config
+[params.link.guard]
+enable = false
+mode = "modal"
+allow_domains = []
+
+# Image config
+[params.image]
+cache_remote = false
+optimise = false
+black_list = []
+
+# Code block wrapper config
+[params.codeblock]
+wrapper = true
+mode = "classic"
+wrapper_class = ""
+max_shown_lines = 10
+shadow = "never"
+copyable = true
+downloadable = false
+fullscreen = false
+line_nos_toggler = true
+line_wrap_toggler = true
+editable = false
+
+# JSON Viewer config
+[params.json_viewer]
+enable = true
+expand_depth = 1
+copyable = true
+sort = false
+boxed = true
+
+# File tree config
+[params.filetree]
+level = 1
+folder_slash = false
+ignore_list = []
+highlight_list = []
+
+# Mermaid config
+[params.mermaid]
+wrapper = true
+cdn = ""
+zenuml = ""
+themes = [
+  "default",
+  "dark"
+]
+security_level = "loose"
+look = "handDrawn"
+font_family = ""
+layout_loaders = []
+layout = "dagre"
+
+# Table of the contents config
+[params.toc]
+enable = true
+keep_static = false
+auto = true
+position = "right"
+ordered = false
+start_level = 2
+end_level = 6
+decrease_h1 = false
+
+# Display a message at the beginning of an article to warn the reader that its content might be expired
+[params.expiration_reminder]
+enable = false
+reminder = 90
+warning = 180
+close_comment = false
+
+# page heading config
+[params.heading]
+capitalize = false
+
+[params.heading.number]
+enable = false
+only_main_section = true
+
+[params.heading.number.format]
+h1 = "{title}"
+h2 = "{h2} {title}"
+h3 = "{h2}.{h3} {title}"
+h4 = "{h2}.{h3}.{h4} {title}"
+h5 = "{h2}.{h3}.{h4}.{h5} {title}"
+h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
+
+# mathematical formulas configuration
+[params.math]
+enable = true
+type = "katex"
+
+# KaTeX server-side rendering (https://katex.org)
+[params.math.katex]
+copy_tex = true
+throw_on_error = false
+error_color = "#ff4949"
+
+[params.math.katex.macros]
+# "\\f" = "#1f(#2)" # usage: $\f{a}{b}$
+
+# MathJax server-side rendering (https://www.mathjax.org)
+[params.math.mathjax]
+cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+
+[params.math.mathjax.packages]
+# "[+]" = ["configmacros"]
+
+[params.math.mathjax.macros]
+# bold = ["{\\bf #1}", 1]
+
+[params.math.mathjax.loader]
+load = [ "ui/safe" ]
+
+[params.math.mathjax.loader.paths]
+# custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
+
+[params.math.mathjax.options]
+enable_menu = true
+skip_html_tags = [
+  "script",
+  "noscript",
+  "style",
+  "textarea",
+  "pre",
+  "code",
+  "math",
+  "select",
+  "option",
+  "mjx-container"
+]
+ignore_html_class = "mathjax_ignore"
+
+[params.math.mathjax.options.include_html_tags]
+# "#comment" = ""
+# br = "\n"
+# wbr = ""
+
+# Mapbox GL JS config (https://docs.mapbox.com/mapbox-gl-js)
+[params.mapbox]
+access_token = ""
+light_style = "mapbox://styles/mapbox/light-v11"
+dark_style = "mapbox://styles/mapbox/dark-v11"
+navigation = true
+geolocate = true
+scale = true
+fullscreen = true
+
+# PostChat AI config
+[params.post_chat]
+enable = false
+key = ""
+user_mode = "iframe"
+add_button = true
+default_input = false
+left = ""
+bottom = ""
+width = ""
+height = ""
+fill = ""
+background_color = ""
+upload_web = true
+show_invite_link = true
+user_title = ""
+user_desc = ""
+black_dom = []
+frame_width = ""
+frame_height = ""
+user_icon = ""
+default_chat_questions = []
+default_search_questions = []
+hot_words = true
+
+# Summary AI config
+[params.post_summary]
+enable = false
+key = ""
+title = ""
+theme = ""
+post_url = ""
+blacklist = ""
+word_limit = 1000
+typing_animate = true
+beginning_text = ""
+loading_text = true
+
+# Podcast AI config
+[params.podcast]
+enable = false
+
+# Related content config (https://gohugo.io/content-management/related/)
+[params.related]
+enable = false
+count = 5
+position = [
+  "aside",
+  "footer"
+]
+
+# Donate (Sponsor) settings
+[params.reward]
+enable = false
+animation = false
+position = "after"
+# comment = "Buy me a coffee"
+mode = "static"
+
+[params.reward.ways]
+# wechatpay = "/images/wechatpay.png"
+# alipay = "/images/alipay.png"
+# paypal = "/images/paypal.png"
+# bitcoin = "/images/bitcoin.png"
+
+# Post footer link config
+[params.post_link]
+markdown = true
+source = true
+edit = true
+report = true
+editor = "vscode"
+
+# Social share links in post page
+[params.share]
+enable = false
+Weibo = true
+Myspace = false
+Blogger = false
+Baidu = false
+Odnoklassniki = false
+Evernote = false
+Skype = false
+Trello = false
+Mix = false
+
+# Comment config
+[params.comment]
+enable = false
+
+# Artalk comment config (https://artalk.js.org/)
+[params.comment.artalk]
+enable = false
+server = "https://yourdomain"
+site = "默认站点"
+prefer_remote_conf = false
+placeholder = ""
+no_comment = ""
+send_btn = ""
+editor_travel = true
+flat_mode = "auto"
+lightgallery = false
+locale = ""
+emoticons = ""
+nest_max = 2
+nest_sort = "DATE_ASC"
+vote = true
+vote_down = false
+ua_badge = true
+list_sort = true
+list_unread_highlight = false
+img_upload = true
+img_lazy_load = false
+preview = true
+version_check = true
+req_timeout = 15000
+pv_add = true
+
+[params.comment.artalk.pagination]
+page_size = 20
+read_more = true
+auto_load = true
+
+[params.comment.artalk.height_limit]
+content = 300
+children = 400
+scrollable = false
+
+# Disqus comment config (https://disqus.com)
+[params.comment.disqus]
+enable = false
+shortname = ""
+
+# Gitalk comment config (https://github.com/gitalk/gitalk)
+[params.comment.gitalk]
+enable = false
+owner = ""
+repo = ""
+client_id = ""
+client_secret = ""
+
+# Valine comment config (https://github.com/xCss/Valine)
+[params.comment.valine]
+enable = false
+app_id = ""
+app_key = ""
+placeholder = ""
+avatar = "mp"
+meta = [
+  'nick',
+  'mail',
+  'link'
+]
+required_fields = []
+page_size = 10
+lang = ""
+visitor = true
+record_ip = true
+highlight = true
+enable_qq = false
+server_urls = ""
+emoji = ""
+comment_count = true
+
+# Waline comment config (https://waline.js.org)
+[params.comment.waline]
+enable = false
+server_url = ""
+pageview = false
+emoji = [ "//unpkg.com/@waline/emojis@1.1.0/weibo" ]
+meta = [
+  "nick",
+  "mail",
+  "link"
+]
+required_meta = []
+login = "enable"
+word_limit = 0
+page_size = 10
+image_uploader = false
+highlighter = false
+comment = false
+tex_renderer = false
+search = false
+recaptcha_v3_key = ""
+turnstile_key = ""
+reaction = false
+
+# Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
+[params.comment.facebook]
+enable = false
+width = "100%"
+num_posts = 10
+app_id = ""
+language_code = ""
+
+# Telegram comments config (https://comments.app)
+[params.comment.telegram]
+enable = false
+site_id = ""
+limit = 5
+height = ""
+color = ""
+colorful = true
+dislikes = false
+outlined = false
+
+# Commento comment config (https://commento.io)
+[params.comment.commento]
+enable = false
+
+# Utterances comment config (https://utteranc.es)
+[params.comment.utterances]
+enable = false
+repo = ""
+issue_term = "pathname"
+label = ""
+light_theme = "github-light"
+dark_theme = "github-dark"
+
+# Twikoo comment config (https://twikoo.js.org/)
+[params.comment.twikoo]
+enable = false
+env_id = ""
+region = ""
+path = ""
+visitor = true
+comment_count = true
+lang = ""
+lightgallery = false
+katex = false
+
+# Giscus comments config
+[params.comment.giscus]
+enable = false
+repo = ""
+repo_id = ""
+category = ""
+category_id = ""
+mapping = ""
+origin = "https://giscus.app"
+strict = "0"
+term = ""
+reactions_enabled = "1"
+emit_metadata = "0"
+input_position = "bottom"
+lang = ""
+light_theme = "light"
+dark_theme = "dark"
+lazy_load = true
+
+# Third-party library config
+[params.library]
+
+[params.library.css]
+# someCSS = "some.css"
+
+[params.library.js]
+# someJavascript = "some.js"
+flyfish = "/js/flyfish.js"
+
+# public Git repository information only then enableGitInfo is true
+[params.git_info]
 repo = ""
 branch = "main"
-# the content directory path relative to the root of the repository
 dir = "content"
-# the issue template for reporting issue of the posts
-# available template params: {title} {URL} {sourceURL}
-issueTpl = "title=[BUG]%20{title}&body=|Field|Value|%0A|-|-|%0A|Title|{title}|%0A|URL|{URL}|%0A|Filename|{sourceURL}|"
+issue_tpl = "title=[BUG]%20{title}&body=|Field|Value|%0A|-|-|%0A|Title|{title}|%0A|URL|{URL}|%0A|Filename|{sourceURL}|"
 
-# App icon config
+# App and PWA config
 [params.app]
-# optional site title override for the app when added to an iOS home screen or Android launcher
-title = "Sephoration"
-# whether to omit favicon resource links
-noFavicon = false
-# modern SVG favicon to use in place of older style .png and .ico files
-svgFavicon = "https://github.com/Sephoration.png"
-# Safari mask icon color
-iconColor = "#5bbad5"
-# Windows v8-10 tile color
-tileColor = "#da532c"
+pwa = false
+name = "Sephoration"
+short_name = ""
+no_favicon = false
+svg_favicon = "https://github.com/Sephoration.png"
+mask_color = "#5bbad5"
+tile_color = "#da532c"
 
-# FixIt 0.2.12 | CHANGED Android browser theme color
-[params.app.themeColor]
+[params.app.theme_color]
 light = "#f8f8f8"
 dark = "#252627"
+
+[[params.app.icons]]
+src = "/apple-touch-icon.png"
+sizes = "180x180"
+type = "image/png"
+purpose = "any maskable"
+
+[[params.app.icons]]
+src = "/android-chrome-192x192.png"
+sizes = "192x192"
+type = "image/png"
+
+[[params.app.icons]]
+src = "/android-chrome-512x512.png"
+sizes = "512x512"
+type = "image/png"
 
 # Search config
 [params.search]
 enable = true
-# type of search engine ["algolia", "fuse", "cse", "post-chat"]
 type = "fuse"
-# max index length of the chunked content
-contentLength = 4000
-# placeholder of the search bar
+content_length = 4000
 placeholder = ""
-# max number of results length
-maxResultLength = 10
-# snippet length of the result
-snippetLength = 30
-# HTML tag name of the highlight part in results
-highlightTag = "em"
-# whether to use the absolute URL based on the baseURL in search index
-absoluteURL = false
+max_result_length = 10
+snippet_length = 30
+highlight_tag = "em"
+absolute_url = false
+anchorify = true
 
 [params.search.algolia]
 index = ""
-appID = ""
-searchKey = ""
+app_id = ""
+search_key = ""
 
-# FixIt 0.2.17 | NEW https://fusejs.io/api/options.html
 [params.search.fuse]
-isCaseSensitive = false
-minMatchCharLength = 2
-findAllMatches = false
+is_case_sensitive = false
+min_match_char_length = 2
+find_all_matches = false
 location = 0
 threshold = 0.3
 distance = 100
-ignoreLocation = false
-useExtendedSearch = false
-ignoreFieldNorm = false
+ignore_location = false
+use_extended_search = false
+ignore_field_norm = false
 
-# FixIt 0.3.16 | NEW Custom Search Engine (CSE)
+[params.search.pagefind]
+bundle_path = "pagefind/"
+debounce_timeout_ms = 300
+use_built_in_filters = true
+sort_by = ""
+sort_order = "desc"
+
+# Custom Search Engine (CSE)
 [params.cse]
-# Search Engine: ["google", "bing"]
 engine = ""
-# Search results page URL (layout: search)
-resultsPage = "/search/"
+results_page = "/search/"
 
-# Google: https://programmablesearchengine.google.com/
-# Google Custom Search Engine Context
 [params.cse.google]
 cx = ""
 
-# Bing (Unsupported): https://www.customsearch.ai/
 [params.cse.bing]
+cx = ""
 
 # Header config
 [params.header]
-# FixIt 0.2.13 | CHANGED desktop header mode ["sticky", "normal", "auto"]
-desktopMode = "sticky"
-# FixIt 0.2.13 | CHANGED mobile header mode ["sticky", "normal", "auto"]
-mobileMode = "auto"
+desktop_mode = "sticky"
+mobile_mode = "auto"
+blur = false
 
 # Header title config
 [params.header.title]
-# URL of the LOGO
 logo = "https://github.com/Sephoration.png"
-# title name
 name = "Sephoration"
-# you can add extra information before the name (HTML format is supported), such as icons
 pre = '<i class="fa-regular fa-compass"></i>'
-# you can add extra information after the name (HTML format is supported), such as icons
 post = ""
-# whether to use typeit animation for title name
 typeit = true
 
-# FixIt 0.2.12 | NEW Header subtitle config
+# Header subtitle config
 [params.header.subtitle]
-# subtitle name
 name = ""
-# whether to use typeit animation for subtitle name
 typeit = false
 
-# FixIt 0.2.18 | NEW Breadcrumb config
+# Breadcrumb config
 [params.breadcrumb]
 enable = true
 sticky = false
-showHome = true
-# FixIt 0.3.13 | NEW
+show_home = true
 separator = "/"
 capitalize = true
 
-# FixIt 0.3.10 | NEW Post navigation config
+# Post navigation config
 [params.navigation]
-# whether to show the post navigation in section pages scope
-inSection = false
-# whether to reverse the next/previous post navigation order
+in_section = false
 reverse = false
 
 # Footer config
 [params.footer]
 enable = true
-# whether to show copyright info
 copyright = true
-# whether to show the author
 author = false
-# Site creation year
 since = "2025"
-# FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
 gov = ""
-# ICP info only in China (HTML format is supported)
 icp = ""
-# license info (HTML format is supported)
 license = "Stay hungry, stay foolish."
 
-# FixIt 0.3.0 | NEW whether to show Hugo and theme info
 [params.footer.powered]
 enable = false
+hugo_logo = false
+theme_logo = false
 
-# FixIt 0.2.17 | CHANGED Site creation time
-[params.footer.siteTime]
+[params.footer.site_time]
 enable = false
 animate = true
 icon = "fa-solid fa-heartbeat"
 pre = ""
 value = ""
 
-# e.g. "2021-12-18T16:15:22+08:00"
-# FixIt 0.2.17 | NEW footer lines order, optional values: ["first", 0, 1, 2, 3, 4, 5, "last"]
 [params.footer.order]
 powered = 0
 copyright = 0
@@ -605,56 +1077,44 @@ statistics = 0
 visitor = 0
 beian = 0
 
-# FixIt 0.3.0 | NEW Archives page config (all pages of posts type)
+# Archives page config (all pages of posts type)
 [params.archives]
-# special amount of posts in archives page
 paginate = 20
-# date format (month and day)
-dateFormat = "01-02"
+date_format = "01-02"
 
 # Section page config (all pages in section)
 [params.section]
-# special amount of pages in each section page
 paginate = 20
-# date format (month and day)
-dateFormat = "01-02"
+date_format = "01-02"
 
-# FixIt 0.3.10 | NEW Section feed config for RSS, Atom and JSON feed.
 [params.section.feed]
-# The number of posts to include in the feed. If set to -1, all posts.
 limit = -1
-# whether to show the full text content in feed.
-fullText = false
+full_text = false
 
 # Term list (category or tag) page config
 [params.list]
-# special amount of posts in each list page
 paginate = 20
-# date format (month and day)
-dateFormat = "01-02"
+date_format = "01-02"
 
-# FixIt 0.3.10 | NEW Term list feed config for RSS, Atom and JSON feed.
 [params.list.feed]
-# The number of posts to include in the feed. If set to -1, all posts.
 limit = -1
-# whether to show the full text content in feed.
-fullText = false
+full_text = false
 
-# FixIt 0.3.13 | NEW recently updated pages config for archives, section and term list
-[params.recentlyUpdated]
+# recently updated pages config for archives, section and term list
+[params.recently_updated]
 archives = true
 section = true
 list = true
 days = 30
-maxCount = 10
+max_count = 10
 
-# FixIt 0.2.17 | NEW TagCloud config for tags page
-[params.tagcloud]
+# TagCloud config for tags page
+[params.tag_cloud]
 enable = false
-min = 14 # Minimum font size in px
-max = 32 # Maximum font size in px
-peakCount = 10 # Maximum count of posts per tag
-orderby = "name" # Order of tags, optional values: ["name", "count"]
+min = 14
+max = 32
+peak_count = 10
+orderby = "name"
 
 # Home page config
 [params.home]
@@ -662,32 +1122,23 @@ orderby = "name" # Order of tags, optional values: ["name", "count"]
 # Home page profile
 [params.home.profile]
 enable = true
-# FixIt 0.4.0 | NEW Whether to show profile and content only in the first home page
-onlyFirstPage = false
-# Gravatar Email for preferred avatar in home page
-gravatarEmail = ""
-# URL of avatar shown in home page, default is author's avatar
-avatarURL = "https://github.com/Sephoration.png"
-# FixIt 0.2.17 | NEW identifier of avatar menu link
-avatarMenu = ""
-# title shown in home page (HTML format is supported)
+only_first_page = false
+gravatar_email = ""
+avatar_url = "https://github.com/Sephoration.png"
+avatar_menu = ""
 title = "Eric Sephoration"
-# subtitle shown in home page (HTML format is supported)
 subtitle = "Code. Create. Explore."
-# whether to use typeit animation for subtitle
 typeit = true
-# whether to show social links
 social = true
-# disclaimer (HTML format is supported)
 disclaimer = ""
 
 # Home page posts
 [params.home.posts]
 enable = false
-# special amount of posts in each home posts page
 paginate = 6
+image_preview = true
 
-# FixIt 0.2.16 | CHANGED Social config about the author
+# Social config about the author
 [params.social]
 GitHub = "Sephoration"
 Linkedin = ""
@@ -757,7 +1208,7 @@ Ko-Fi = ""
 BuyMeaCoffee = ""
 Linktree = ""
 QQ = ""
-QQGroup = "" # https://qun.qq.com/join.html
+QQGroup = ""
 Diaspora = ""
 CSDN = ""
 Discord = ""
@@ -778,118 +1229,52 @@ Bluesky = ""
 Phone = ""
 Email = ""
 RSS = false
-# custom social links like the following
-# [params.social.twitter]
-#   id = "lruihao"
-#   weight = 3
-#   prefix = "https://twitter.com/"
-#   Title = "Twitter"
-#   [social.twitter.icon]
-#     class = "fa-brands fa-x-twitter fa-fw"
 
 # TypeIt config
 [params.typeit]
-# typing speed between each step (measured in milliseconds)
 speed = 100
-# blinking speed of the cursor (measured in milliseconds)
-cursorSpeed = 1000
-# character used for the cursor (HTML format is supported)
-cursorChar = "|"
-# cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
+cursor_speed = 1000
+cursor_char = "|"
 duration = -1
-# FixIt 0.2.18 | NEW whether your strings will continuously loop after completing
 loop = false
 
-# FixIt 0.2.15 | NEW Mermaid config
-# See http://fixit.lruihao.cn/documentation/content-management/diagrams-support/mermaid/
-[params.mermaid]
-# FixIt 0.4.0 | NEW Mermaid ESM module CDN source
-# default is https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs
-cdn = ""
-# FixIt 0.4.0 | NEW ZenUML ESM module CDN source
-# default is empty, you can set it to a CDN source to enable ZenUML support
-# e.g. https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs
-zenuml = ""
-# For values, see https://mermaid.js.org/config/theming.html#available-themes
-themes = [
-  "default",
-  "dark"
-]
-# FixIt 0.4.0 | NEW The security level for Mermaid diagrams
-# optional values: ["strict", "loose", "antiscript", "sandbox"]
-securityLevel = "loose"
-# FixIt 0.4.0 | NEW The appearance style for Mermaid diagrams
-# optional values: ["classic", "handDrawn"]
-look = "handDrawn"
-# FixIt 0.4.0 | NEW Specifies the font to be used in the rendered diagrams
-fontFamily = ""
-# FixIt 0.4.0 | NEW Layout loaders from ESM module CDN sources (e.g., ELK layout engine)
-# Example: ["https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs"]
-# This will enable additional layout options: ["elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"]
-layoutLoaders = []
-# Default layout algorithm for rendering diagrams
-# Available options: "dagre" (default), "elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"
-# Note: ELK layouts require layoutLoaders to be configured first
-layout = "dagre"
-
-# FixIt 0.3.13 | NEW Admonitions custom config
-# See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/admonition/#custom-admonitions
-# syntax: <type> = <icon>
+# Admonitions custom config
 [params.admonition]
 # ban = "fa-solid fa-ban"
 
-# FixIt 0.3.14 | NEW Task lists custom config
-# See https://fixit.lruihao.cn/documentation/content-management/advanced/#custom-task-lists
-# syntax: <sign> = <icon>
-[params.taskList]
+# Task lists custom config
+[params.task_list]
 # tip = "fa-regular fa-lightbulb"
 
-# FixIt 0.3.15 | NEW version shortcode config
-[params.repoVersion]
-# url prefix for the release tag
-url = "https://github.com/hugo-fixit/FixIt/releases/tag/v"
-# project name
+# version shortcode config
+[params.repo_version]
 name = "FixIt"
+url = "https://github.com/hugo-fixit/FixIt/releases/tag/v"
 
-# FixIt 0.2.12 | NEW PanguJS config
+# PanguJS config
 [params.pangu]
-# For Chinese writing
 enable = false
-selector = "article" # FixIt 0.2.17 | NEW
+selector = "article"
 
-# FixIt 0.2.12 | NEW Watermark config
-# Detail config see https://github.com/Lruihao/watermark#readme
+# Watermark config
 [params.watermark]
 enable = false
-# watermark's text (HTML format is supported)
 content = ""
-# watermark's transparency
 opacity = 0.1
-# watermark's width. unit: px
 width = 150
-# watermark's height. unit: px
 height = 20
-# row spacing of watermarks. unit: px
-rowSpacing = 60
-# col spacing of watermarks. unit: px
-colSpacing = 30
-# watermark's tangent angle. unit: deg
+row_spacing = 60
+col_spacing = 30
 rotate = 15
-# watermark's fontSize. unit: rem
-fontSize = 0.85
-# FixIt 0.2.13 | NEW watermark's fontFamily
-fontFamily = "inherit"
+font_size = 0.85
+font_family = "inherit"
 
-# FixIt 0.3.10 | NEW Busuanzi count
+# Busuanzi count
 [params.busuanzi]
-# whether to enable busuanzi count
 enable = false
-# busuanzi count core script source. Default is https://vercount.one/js
 source = "https://vercount.one/js"
-# whether to show the site views
-siteViews = true
-# whether to show the page views
-pageViews = true
+site_views = true
+page_views = true
 
 # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
 [params.verification]
@@ -903,62 +1288,52 @@ sogou = ""
 
 # Site SEO config
 [params.seo]
-# image URL
-image = ""
-# thumbnail URL
-thumbnailUrl = ""
+cover = ""
+thumbnail_url = ""
+images = []
+
+[params.seo.publisher]
+name = ""
+logo_url = ""
 
 # Analytics config
 [params.analytics]
 enable = false
 
-# Google Analytics
 [params.analytics.google]
 id = ""
-# whether to anonymize IP
-anonymizeIP = true
+anonymize_ip = true
 
-# Fathom Analytics
 [params.analytics.fathom]
 id = ""
-# server url for your tracker if you're self hosting
 server = ""
 
-# FixIt 0.3.16 | NEW Baidu Analytics
 [params.analytics.baidu]
 id = ""
 
-# FixIt 0.3.16 | NEW Umami Analytics
 [params.analytics.umami]
 data_website_id = ""
 src = ""
 data_host_url = ""
 data_domains = ""
 
-# FixIt 0.3.16 | NEW Plausible Analytics
 [params.analytics.plausible]
 data_domain = ""
 src = ""
 
-# FixIt 0.3.16 | NEW Cloudflare Analytics
 [params.analytics.cloudflare]
 token = ""
 
-# FixIt 0.3.16 | NEW Splitbee Analytics
 [params.analytics.splitbee]
 enable = false
-# no cookie mode
 no_cookie = true
-# respect the do not track setting of the browser
 do_not_track = true
-# token(optional), more info on https://splitbee.io/docs/embed-the-script
 data_token = ""
 
 # Cookie consent config
 [params.cookieconsent]
 enable = true
 
-# text strings used for Cookie consent banner
 [params.cookieconsent.content]
 message = ""
 dismiss = ""
@@ -966,617 +1341,180 @@ link = ""
 
 # CDN config for third-party library files
 [params.cdn]
-# CDN data file name, disabled by default ["jsdelivr.yml", "unpkg.yml", ...]
-# located in "themes/FixIt/assets/data/cdn/" directory
-# you can store your own data files in the same path under your project: "assets/data/cdn/"
 data = ""
 
 # Compatibility config
 [params.compatibility]
-# whether to use Polyfill.io on cdnjs to be compatible with older browsers
-# https://cdnjs.cloudflare.com/polyfill
 polyfill = false
-# whether to use object-fit-images to be compatible with older browsers
-objectFit = false
+object_fit = false
 
-# FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
-[params.githubCorner]
+# GitHub banner in the top-right or top-left corner
+[params.github_corner]
 enable = false
 permalink = "https://github.com/hugo-fixit/FixIt"
 title = "View source on GitHub"
-position = "right" # ["left", "right"]
+position = "right"
 
-# FixIt 0.2.14 | NEW Gravatar config
+# Gravatar config
 [params.gravatar]
-# FixIt 0.2.18 | NEW Depends on the author's email, if the author's email is not set, the local avatar will be used
 enable = false
-# Gravatar host, default: "www.gravatar.com"
-host = "www.gravatar.com" # ["cravatar.cn", "gravatar.loli.net", ...]
-style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
+host = "www.gravatar.com"
+style = ""
 
-# FixIt 0.2.16 | NEW Back to top
-[params.backToTop]
+# Back to top
+[params.back_to_top]
 enable = true
-# FixIt 0.4.0 | CHANGED whether to show the scroll percent indicator around the back to top button
 scrollpercent = false
 
-# FixIt 0.2.16 | NEW Reading progress bar
-[params.readingProgress]
+# Reading progress bar
+[params.reading_progress]
 enable = true
-# Available values: ["left", "right"]
 start = "left"
-# Available values: ["top", "bottom"]
 position = "top"
 reversed = false
 light = ""
 dark = ""
 height = "3px"
 
-# FixIt 0.2.17 | NEW Progress bar in the top during page loading.
-# For more information: https://github.com/CodeByZach/pace
+# Progress bar in the top during page loading.
 [params.pace]
 enable = false
-# All available colors:
-# ["black", "blue", "green", "orange", "pink", "purple", "red", "silver", "white", "yellow"]
 color = "blue"
-# All available themes:
-# ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
-# "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
 theme = "minimal"
 
-# FixIt 0.3.17 | NEW PostChat AI config
-# Based on your posts to build a knowledge base, support AI summary, AI search, and AI Chatbot.
-# Get PostChat Key from my invitation link, thanks for your support!
-# https://ai.zhheo.com/console/login?InviteID=85041330
-[params.postChat]
-enable = false
-key = ""
-# How users initiate chats: ["iframe", "magic"]
-userMode = "iframe"
-addButton = true
-defaultInput = false
-left = ""
-bottom = ""
-width = ""
-height = ""
-fill = ""
-backgroundColor = ""
-upLoadWeb = true
-showInviteLink = true
-userTitle = ""
-userDesc = ""
-# dom container to be blacked out, e.g. [".aplayer"]
-blackDom = []
-# Only for iframe mode
-frameWidth = "" # e.g. "375px"
-frameHeight = "" # e.g. "600px"
-# only for magic mode
-userIcon = ""
-defaultChatQuestions = []
-defaultSearchQuestions = []
-# FixIt 0.4.0 | NEW
-hotWords = true
-
-# FixIt 0.3.17 | NEW Summary AI config
-# See https://ai.zhheo.com/docs/summary.html
-[params.postSummary]
-enable = false
-# If you set `params.postChat.key`, you don't need to set `params.postSummary.key`
-key = ""
-title = ""
-# themes options: ["", "simple", "yanzhi"]
-theme = ""
-postURL = ""
-blacklist = ""
-wordLimit = 1000
-typingAnimate = true
-beginningText = ""
-loadingText = true
-
-# FixIt 0.3.10 | NEW Global Feed config for RSS, Atom and JSON feed.
+# Global Feed config for RSS, Atom and JSON feed.
 [params.feed]
-# The number of posts to include in the feed. If set to -1, all posts.
 limit = 10
-# whether to show the full text content in feed.
-fullText = true
+full_text = true
 
-# Site Challenge for Follow: https://follow.is/
 [params.feed.follow]
-feedId = ""
-userId = ""
+feed_id = ""
+user_id = ""
 
-# FixIt 0.3.17 | NEW Image config
-# Combined with Hugo's image processing option `imaging` for image optimisation
-[params.image]
-# cache remote images for better optimisations
-cacheRemote = false
-# Image resizing and optimisation (may slow builds)
-optimise = false
-# FixIt 0.4.0 | NEW A list of image file names or patterns to exclude from optimisation
-# e.g. ["no-optimize.jpg", "*.tiff", "images/exclude-*.webp"]
-blackList = []
+# Taxonomy icons config
+[params.taxonomy_icons]
+# category = ["fa-solid fa-folder-tree", "fa-solid fa-folder", "fa-solid fa-folder-open"]
 
-# FixIt 0.4.0 | NEW Code block wrapper config
-# you can override the global config via Markdown attributes, for example:
-# ```lang {mode="mac", maxShownLines=5}
-# code here
-# ```
-[params.codeblock]
-# whether to enable the code block wrapper
-wrapper = true
-# code block mode
-# available modes: ["classic", "mac", "simple", ...]
-# if you set to custom value, you need to create a custom CSS for data-mode attribute
-mode = "classic"
-# additional classes for the code block wrapper
-# e.g. "is-collapsed is-expanded line-nos-hidden line-wrapping"
-wrapperClass = ""
-# the maximum number of lines to show in the code block preview
-maxShownLines = 10
-# whether to enable code copy button
-copyable = true
-# [classic] whether to enable line numbers toggle button in the code block header
-lineNosToggler = true
-# [classic] whether to enable toggle line wrapping button in the code block header
-lineWrapToggler = true
-# [classic][Experimental] whether to enable code edit button in the code block header
-editable = false
+# Print config
+[params.print]
+expand_admonition = true
+expand_code = true
+expand_details = true
+expand_file_tree = false
 
-# FixIt 0.4.0 | NEW JSON Viewer config
-# See https://github.com/Lruihao/json-viewer-element
-[params.jsonViewer]
-enable = true
-expandDepth = 1
-copyable = true
-sort = false
-boxed = true
-
-# FixIt 0.3.12 | NEW Custom partials config
-# Custom partials must be stored in the /layouts/_partials/ directory.
-# Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/
-[params.customPartials]
+# Custom partials config
+[params.custom_partials]
 head = []
-menuDesktop = []
-menuMobile = []
+menu_desktop = []
+menu_mobile = []
 profile = []
 aside = []
 comment = []
 footer = []
 widgets = []
 assets = []
-postTocBefore = []
-postTocAfter = []
-postContentBefore = []
-postContentAfter = []
-postFooterBefore = []
-postFooterAfter = []
+post_toc_before = []
+post_toc_after = []
+post_content_before = []
+post_content_after = []
+post_footer_before = []
+post_footer_after = []
 
-# FixIt 0.2.15 | NEW Developer options
-# Select the scope named `public_repo` to generate personal access token,
-# Configure with environment variable `HUGO_PARAMS_GHTOKEN=xxx`, see https://gohugo.io/functions/os/getenv/#examples
+# SCSS variables customization via config
+[params.appearance]
+# Global Typography
+global_font_family = ""
+global_font_size = ""
+global_font_weight = ""
+global_line_height = ""
+global_border_radius = ""
+# Global Colors
+global_background_color = ""
+global_background_color_dark = ""
+global_font_color = ""
+global_font_color_dark = ""
+global_font_secondary_color = ""
+global_font_secondary_color_dark = ""
+global_link_color = ""
+global_link_color_dark = ""
+global_link_hover_color = ""
+global_link_hover_color_dark = ""
+global_border_color = ""
+global_border_color_dark = ""
+# Scrollbar
+scrollbar_color = ""
+scrollbar_hover_color = ""
+# Selection
+selection_color = ""
+selection_color_dark = ""
+# Header
+header_background_color = ""
+header_background_color_dark = ""
+header_title_font_size = ""
+header_title_font_family = ""
+menu_active_color = ""
+menu_active_color_dark = ""
+menu_border_color = ""
+menu_border_color_dark = ""
+search_background_color = ""
+search_background_color_dark = ""
+# Tag Cloud
+tag_cloud_start = ""
+tag_cloud_start_dark = ""
+tag_cloud_end = ""
+tag_cloud_end_dark = ""
+# Single Content
+toc_title_font_size = ""
+toc_content_font_size = ""
+collection_title_font_size = ""
+collection_list_font_size = ""
+related_title_font_size = ""
+related_list_font_size = ""
+single_link_color = ""
+single_link_color_dark = ""
+single_link_hover_color = ""
+single_link_hover_color_dark = ""
+# Table
+table_background_color = ""
+table_background_color_dark = ""
+table_thead_color = ""
+table_thead_color_dark = ""
+table_border_color = ""
+table_border_color_dark = ""
+# Blockquote
+blockquote_color = ""
+blockquote_color_dark = ""
+# Reward
+reward_color = ""
+reward_color_dark = ""
+reward_img_width = ""
+# Pagination
+pagination_link_color = ""
+pagination_link_color_dark = ""
+pagination_link_hover_color = ""
+pagination_link_hover_color_dark = ""
+# Code
+code_color = ""
+code_color_dark = ""
+code_font_family = ""
+code_header_color = ""
+code_header_color_dark = ""
+code_header_background_color = ""
+code_header_background_color_dark = ""
+code_background_color = ""
+code_background_color_dark = ""
+code_error_color = ""
+code_highlight_color = ""
+code_highlight_color_dark = ""
+code_font_size = ""
+code_block_font_size = ""
+# GitHub Corners
+github_corner_color = ""
+github_corner_color_dark = ""
+github_corner_fill = ""
+github_corner_fill_dark = ""
+
+# Developer options
 [params.dev]
 enable = false
-# Check for updates
 c4u = false
-
-# Page config
-[params.page]
-# FixIt 0.2.18 | NEW whether to enable the author's avatar of the post
-authorAvatar = true
-# whether to hide a page from home page
-hiddenFromHomePage = false
-# whether to hide a page from search results
-hiddenFromSearch = false
-# FixIt 0.3.0 | NEW whether to hide a page from related posts
-hiddenFromRelated = false
-# FixIt 0.3.10 | NEW whether to hide a page from RSS, Atom and JSON feed
-hiddenFromFeed = false
-# whether to enable twemoji
-twemoji = false
-# FixIt 0.2.18 | CHANGED whether to enable lightgallery
-# set to true, images in the content will be shown as the gallery if the image has a title, e.g. ![alt](src "title")
-# set to "force", images in the content will be forced to shown as the gallery regardless of the image has a title or not, e.g. ![alt](src)
-# TODO change gallery engine in the future
-lightgallery = "force"
-# whether to enable the ruby extended syntax
-ruby = true
-# whether to enable the fraction extended syntax
-fraction = true
-# whether to enable the fontawesome extended syntax
-fontawesome = true
-# license info (HTML format is supported)
-license = ""
-# whether to show link to Raw Markdown content of the post
-linkToMarkdown = true
-# FixIt 0.3.0 | NEW whether to show link to view source code of the post
-linkToSource = true
-# FixIt 0.3.0 | NEW whether to show link to edit the post
-linkToEdit = true
-# FixIt 0.3.0 | NEW whether to show link to report issue for the post
-linkToReport = true
-# FixIt 0.3.20 | NEW whether to show link to view the post in VSCode
-linkToVscode = false
-# FixIt 0.3.10 | CHANGED Page style ["narrow", "normal", "wide", ...]
-pageStyle = "wide"
-# FixIt 0.2.17 | CHANGED Auto Bookmark Support
-# If true, save the reading progress when closing the page.
-autoBookmark = false
-# FixIt 0.2.17 | NEW whether to enable wordCount
-wordCount = true
-# FixIt 0.2.17 | NEW whether to enable readingTime
-readingTime = true
-# FixIt 0.2.17 | NEW end of post flag
-endFlag = ""
-# FixIt 0.2.18 | NEW whether to enable instant.page
-instantPage = false
-# FixIt 0.3.0 | NEW whether to enable collection list at the sidebar
-collectionList = false
-# FixIt 0.3.0 | NEW whether to enable collection navigation at the end of the post
-collectionNavigation = false
-
-# FixIt 0.2.15 | NEW Repost config
-[params.page.repost]
-enable = false
-url = ""
-
-# Table of the contents config
-[params.page.toc]
-# whether to enable the table of the contents
-enable = true
-# whether to keep the static table of the contents in front of the post
-keepStatic = false
-# whether to make the table of the contents in the sidebar automatically collapsed
-auto = true
-# FixIt 0.2.13 | NEW position of TOC ["left", "right"]
-position = "right"
-# FixIt 0.3.12 | NEW supersede `markup.tableOfContents` settings
-ordered = false
-startLevel = 2
-endLevel = 6
-# FixIt 0.4.0 | NEW whether to decrease the H1 heading level in content
-decreaseH1 = false
-
-# FixIt 0.2.13 | NEW Display a message at the beginning of an article to warn the reader that its content might be expired
-[params.page.expirationReminder]
-enable = false
-# Display the reminder if the last modified time is more than 90 days ago
-reminder = 90
-# Display warning if the last modified time is more than 180 days ago
-warning = 180
-# If the article expires, close the comment or not
-closeComment = false
-
-# FixIt 0.3.0 | NEW page heading config
-[params.page.heading]
-# FixIt 0.3.3 | NEW whether to capitalize automatic text of headings
-capitalize = false
-
-# FixIt 0.3.12 | CHANGED must set `params.page.toc.ordered` to true
-[params.page.heading.number]
-# whether to enable auto heading numbering
-enable = false
-# FixIt 0.3.3 | NEW only enable in main section pages (default is posts)
-onlyMainSection = true
-
-[params.page.heading.number.format]
-h1 = "{title}"
-h2 = "{h2} {title}"
-h3 = "{h2}.{h3} {title}"
-h4 = "{h2}.{h3}.{h4} {title}"
-h5 = "{h2}.{h3}.{h4}.{h5} {title}"
-h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
-
-# FixIt 0.4.0 | CHANGED mathematical formulas configuration
-# See http://fixit.lruihao.cn/documentation/content-management/markdown-syntax/extended/#formula
-[params.page.math]
-enable = true
-# mathematical formulas rendering engines, optional values: ["katex", "mathjax"]
-type = "katex"
-
-# KaTeX server-side rendering (https://katex.org)
-# KaTeX partial config: https://gohugo.io/functions/transform/tomath/#options
-[params.page.math.katex]
-# KaTeX extension copy-tex
-copyTex = true
-throwOnError = false
-errorColor = "#ff4949"
-
-# custom macros map
-# syntax: <macro> = <definition>
-[params.page.math.katex.macros]
-# "\\f" = "#1f(#2)"  # usage: $\f{a}{b}$
-
-# MathJax server-side rendering (https://www.mathjax.org)
-# MathJax config: https://docs.mathjax.org/en/latest/options/index.html
-[params.page.math.mathjax]
-cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-
-[params.page.math.mathjax.packages]
-# "[+]" = ["configmacros"]
-
-# custom macros map
-# syntax: <macro> = <definition>
-[params.page.math.mathjax.macros]
-# bold = ["{\\bf #1}", 1]  # usage: $\bold{math}$
-
-[params.page.math.mathjax.loader]
-load = [ "ui/safe" ]
-
-[params.page.math.mathjax.loader.paths]
-# custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
-
-# more loader config e.g source, dependencies, provides etc.
-[params.page.math.mathjax.options]
-enableMenu = true
-# HTML tags that won't be searched for math
-skipHtmlTags = [
-  "script",
-  "noscript",
-  "style",
-  "textarea",
-  "pre",
-  "code",
-  "math",
-  "select",
-  "option",
-  "mjx-container"
-]
-# class that marks tags not to search
-ignoreHtmlClass = "mathjax_ignore"
-
-# HTML tags that can appear within math
-[params.page.math.mathjax.options.includeHtmlTags]
-# "#comment" = ""
-# br = "\n"
-# wbr = ""
-
-# Mapbox GL JS config (https://docs.mapbox.com/mapbox-gl-js)
-[params.page.mapbox]
-# access token of Mapbox GL JS
-accessToken = ""
-# style for the light theme
-lightStyle = "mapbox://styles/mapbox/light-v11"
-# style for the dark theme
-darkStyle = "mapbox://styles/mapbox/dark-v11"
-# whether to add NavigationControl
-navigation = true
-# whether to add GeolocateControl
-geolocate = true
-# whether to add ScaleControl
-scale = true
-# whether to add FullscreenControl
-fullscreen = true
-
-# FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
-[params.page.related]
-enable = false
-count = 5
-# FixIt 0.3.20 | NEW position of related content, optional values: ["aside", "footer"]
-position = [
-  "aside",
-  "footer"
-]
-
-# FixIt 0.2.17 | NEW Donate (Sponsor) settings
-[params.page.reward]
-enable = false
-animation = false
-# position relative to post footer, optional values: ["before", "after"]
-position = "after"
-# comment = "Buy me a coffee"
-# FixIt 0.2.18 | NEW display mode of QR code images, optional values: ["static", "fixed"], default: `static`
-mode = "static"
-
-[params.page.reward.ways]
-# wechatpay = "/images/wechatpay.png"
-# alipay = "/images/alipay.png"
-# paypal = "/images/paypal.png"
-# bitcoin = "/images/bitcoin.png"
-
-# Social share links in post page
-[params.page.share]
-enable = false
-Weibo = true
-Myspace = false
-Blogger = false
-Baidu = false
-Odnoklassniki = false
-Evernote = false
-Skype = false
-Trello = false
-Mix = false
-
-# FixIt 0.2.15 | CHANGED Comment config
-[params.page.comment]
-enable = false
-
-# FixIt 0.2.13 | NEW Artalk comment config (https://artalk.js.org/)
-[params.page.comment.artalk]
-enable = false
-server = "https://yourdomain"
-site = "默认站点"
-# FixIt 0.3.3 | NEW whether use backend configuration
-useBackendConf = false
-placeholder = ""
-noComment = ""
-sendBtn = ""
-editorTravel = true
-flatMode = "auto"
-# FixIt 0.2.17 | CHANGED enable lightgallery support
-lightgallery = false
-locale = "" # FixIt 0.2.15 | NEW
-# FixIt 0.2.18 | NEW
-emoticons = ""
-nestMax = 2
-nestSort = "DATE_ASC" # ["DATE_ASC", "DATE_DESC", "VOTE_UP_DESC"]
-vote = true
-voteDown = false
-uaBadge = true
-listSort = true
-imgUpload = true
-preview = true
-versionCheck = true
-
-# Disqus comment config (https://disqus.com)
-[params.page.comment.disqus]
-enable = false
-# Disqus shortname to use Disqus in posts
-shortname = ""
-
-# Gitalk comment config (https://github.com/gitalk/gitalk)
-[params.page.comment.gitalk]
-enable = false
-owner = ""
-repo = ""
-clientId = ""
-clientSecret = ""
-
-# Valine comment config (https://github.com/xCss/Valine)
-[params.page.comment.valine]
-enable = false
-appId = ""
-appKey = ""
-placeholder = ""
-avatar = "mp"
-meta = [
-  'nick',
-  'mail',
-  'link'
-]
-requiredFields = []
-pageSize = 10
-lang = ""
-visitor = true
-recordIP = true
-highlight = true
-enableQQ = false
-serverURLs = ""
-# emoji data file name, default is "google.yml"
-# ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
-# located in "themes/FixIt/assets/lib/valine/emoji/" directory
-# you can store your own data files in the same path under your project:
-# "assets/lib/valine/emoji/"
-emoji = ""
-commentCount = true
-
-# FixIt 0.2.13 | NEW
-# FixIt 0.2.16 | CHANGED Waline comment config (https://waline.js.org)
-[params.page.comment.waline]
-enable = false
-serverURL = ""
-pageview = false # FixIt 0.2.15 | NEW
-emoji = [ "//unpkg.com/@waline/emojis@1.1.0/weibo" ]
-meta = [
-  "nick",
-  "mail",
-  "link"
-]
-requiredMeta = []
-login = "enable"
-wordLimit = 0
-pageSize = 10
-imageUploader = false # FixIt 0.2.15 | NEW
-highlighter = false # FixIt 0.2.15 | NEW
-comment = false # FixIt 0.2.15 | NEW
-texRenderer = false # FixIt 0.2.16 | NEW
-search = false # FixIt 0.2.16 | NEW
-recaptchaV3Key = "" # FixIt 0.2.16 | NEW
-turnstileKey = "" # FixIt 0.3.8 | NEW
-reaction = false
-
-# FixIt 0.2.18 | NEW
-# Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
-[params.page.comment.facebook]
-enable = false
-width = "100%"
-numPosts = 10
-appId = ""
-languageCode = ""
-
-# Telegram comments config (https://comments.app)
-[params.page.comment.telegram]
-enable = false
-siteID = ""
-limit = 5
-height = ""
-color = ""
-colorful = true
-dislikes = false
-outlined = false
-
-# Commento comment config (https://commento.io)
-[params.page.comment.commento]
-enable = false
-
-# Utterances comment config (https://utteranc.es)
-[params.page.comment.utterances]
-enable = false
-# owner/repo
-repo = ""
-issueTerm = "pathname"
-label = ""
-lightTheme = "github-light"
-darkTheme = "github-dark"
-
-# FixIt 0.2.13 | NEW Twikoo comment config (https://twikoo.js.org/)
-[params.page.comment.twikoo]
-enable = false
-envId = ""
-region = ""
-path = ""
-visitor = true
-commentCount = true
-# FixIt 0.2.17 | CHANGED enable lightgallery support
-lightgallery = false
-# FixIt 0.2.17 | NEW enable Katex support
-katex = false
-
-# FixIt 0.2.14 | NEW Giscus comments config
-[params.page.comment.giscus]
-enable = false
-repo = ""
-repoId = ""
-category = ""
-categoryId = ""
-mapping = ""
-origin = "https://giscus.app" # FixIt NEW | 0.3.7 Or set it to your self-hosted domain
-strict = "0" # FixIt NEW | 0.2.18
-term = ""
-reactionsEnabled = "1"
-emitMetadata = "0"
-inputPosition = "bottom" # ["top", "bottom"]
-lang = ""
-lightTheme = "light"
-darkTheme = "dark"
-lazyLoad = true
-
-# Third-party library config
-[params.page.library]
-
-[params.page.library.css]
-# someCSS = "some.css"
-# located in "assets/"
-# Or
-# someCSS = "https://cdn.example.com/some.css"
-
-[params.page.library.js]
-# someJavascript = "some.js"
-# located in "assets/"
-# Or
-# someJavascript = "https://cdn.example.com/some.js"
-
-# Page SEO config
-[params.page.seo]
-# image URL
-images = []
-
-# Publisher info
-[params.page.seo.publisher]
-name = ""
-logoUrl = ""
-
-
-# ...
-[page.library]
-  [page.library.js]
-    flyfish = "/js/flyfish.js"
