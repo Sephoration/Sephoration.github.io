@@ -1,0 +1,8 @@
+name = "cmpt-sephoration"
+license = "MIT"
+description = "Sephoration blog customizations as a Hugo theme component."
+homepage = "https://github.com/Sephoration"
+min_version = "0.161.0"
+
+[author]
+name = "Eric Sephoration"

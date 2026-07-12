@@ -2,3 +2,9 @@
 	path = themes/FixIt
 	url = git@github.com:hugo-fixit/FixIt.git
 	branch = v1
+[submodule "themes/component-projects"]
+	path = themes/component-projects
+	url = https://github.com/hugo-fixit/component-projects.git
+[submodule "themes/cmpt-markmap"]
+	path = themes/cmpt-markmap
+	url = https://github.com/hugo-fixit/cmpt-markmap.git

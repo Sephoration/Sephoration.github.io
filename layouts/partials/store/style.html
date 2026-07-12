@@ -1,5 +1,0 @@
-{{- $noop := .Page.WordCount -}}
-{{- $this := .Page.Store.Get "this" -}}
-{{- $style := $this.style | default slice -}}
-{{- $style = $style | append (slice .Data) -}}
-{{- .Page.Store.Set "this" (merge $this (dict "style" $style)) -}}

@@ -15,7 +15,7 @@ title = "Sephoration"
 # hostname (and path) to the root
 baseURL = "https://Sephoration.github.io/"
 # theme list
-theme = ["FixIt"] # enable in your site config file
+theme = ["cmpt-sephoration", "FixIt", "component-projects", "cmpt-markmap"]
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
 # language code (deprecated in Hugo v0.158.0, use locale instead)
@@ -35,7 +35,7 @@ enableGitInfo = true
 # whether to use emoji code
 enableEmoji = true
 # suppress v1 dev version warning
-ignoreLogs = ['warning-v1-dev']
+ignoreLogs = ['warning-v1-dev', 'error-get-remote-json']
 # the main sections of a site
 # if set, the MainSections method on the Site object returns the given sections,
 # otherwise it returns the section with the most pages.
@@ -72,34 +72,24 @@ quality = 75
 [menus]
 
 [[menus.main]]
-identifier = "archives"
-parent = ""
-pre = ""
-post = ""
+identifier = "posts"
 name = "文章"
-url = "/archives/"
-title = ""
+url = "/posts/"
 weight = 1
 
 [menus.main.params]
-class = ""
-draft = false
 icon = "fa-solid fa-archive"
-type = ""
-divided = false
 
 [[menus.main]]
-identifier = "about"
-parent = ""
-pre = ""
-post = ""
-name = "个人介绍"
-url = "/about/"
-title = ""
+identifier = "tags"
+name = "归类"
+url = "/tags/"
 weight = 2
 
 [menus.main.params]
-icon = "fa-solid fa-user"
+icon = "fa-solid fa-tags"
+
+
 
 # -------------------------------------------------------------------------------------
 # Related content Configuration
@@ -208,6 +198,7 @@ typographer = true
 
 # See: https://gohugo.io/configuration/markup/#extras
 [markup.goldmark.extensions.extras]
+enable = true
 
 [markup.goldmark.extensions.extras.delete]
 enable = true
@@ -319,16 +310,6 @@ privacyEnhanced = true
 
 [outputFormats]
 
-# Options to make output /archives/index.html file
-[outputFormats.archives]
-path = "archives"
-baseName = "index"
-mediaType = "text/html"
-isPlainText = false
-isHTML = true
-permalinkable = true
-notAlternative = true
-
 # Options to make output /offline/index.html file
 [outputFormats.offline]
 path = "offline"
@@ -398,7 +379,6 @@ _merge = "shallow"
 home = [
   "html",
   "rss",
-  "archives",
   "search",
   "offline",
   "manifest",
@@ -509,7 +489,7 @@ word_count = true
 # whether to enable readingTime
 reading_time = true
 # whether to enable instant.page
-instant_page = false
+instant_page = true
 # whether to enable collection list at the sidebar
 collection_list = false
 # whether to enable collection navigation at the end of the post
@@ -1032,11 +1012,9 @@ blur = false
 
 # Header title config
 [params.header.title]
-logo = "https://github.com/Sephoration.png"
 name = "Sephoration"
-pre = '<i class="fa-regular fa-compass"></i>'
-post = ""
-typeit = true
+typeit = false
+logo = "https://github.com/Sephoration.png"
 
 # Header subtitle config
 [params.header.subtitle]
@@ -1064,7 +1042,7 @@ author = false
 since = "2025"
 gov = ""
 icp = ""
-license = "Stay hungry, stay foolish."
+license = ""
 
 [params.footer.powered]
 enable = false
@@ -1113,12 +1091,12 @@ full_text = false
 archives = true
 section = true
 list = true
-days = 30
+days = 7
 max_count = 10
 
 # TagCloud config for tags page
 [params.tag_cloud]
-enable = false
+enable = true
 min = 14
 max = 32
 peak_count = 10
@@ -1420,7 +1398,7 @@ aside = []
 comment = []
 footer = []
 widgets = []
-assets = []
+assets = ["inject/cmpt-markmap.fixit.html"]
 post_toc_before = []
 post_toc_after = []
 post_content_before = []
