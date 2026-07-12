@@ -1013,8 +1013,9 @@ blur = false
 # Header title config
 [params.header.title]
 name = "Sephoration"
-typeit = false
+typeit = true
 logo = "https://github.com/Sephoration.png"
+pre = '<i class="fa-regular fa-compass"></i>'
 
 # Header subtitle config
 [params.header.subtitle]
