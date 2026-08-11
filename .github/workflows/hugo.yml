@@ -28,12 +28,12 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.162.1"
+          hugo-version: "0.164.0"
           extended: true
 
       - name: Install Dart Sass
         run: |
-          curl -sL "https://github.com/sass/dart-sass/releases/download/1.77.8/dart-sass-1.77.8-linux-x64.tar.gz" | tar xz
+          curl -sL "https://github.com/sass/dart-sass/releases/download/1.102.0/dart-sass-1.102.0-linux-x64.tar.gz" | tar xz
           sudo mv dart-sass/* /usr/local/bin/
 
       - name: Build with Hugo

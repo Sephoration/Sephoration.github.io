@@ -35,7 +35,7 @@ enableGitInfo = true
 # whether to use emoji code
 enableEmoji = true
 # suppress v1 dev version warning
-ignoreLogs = ['warning-v1-dev', 'error-get-remote-json']
+ignoreLogs = ['error-get-remote-json']
 # the main sections of a site
 # if set, the MainSections method on the Site object returns the given sections,
 # otherwise it returns the section with the most pages.
@@ -158,7 +158,6 @@ source = "themes/FixIt/layouts/_markup"
 target = "layouts/_markup"
 
 [module.hugoVersion]
-extended = true
 min = "0.161.0"
 
 # -------------------------------------------------------------------------------------
@@ -420,13 +419,13 @@ collection = "collections"
 
 [params]
 # FixIt theme version
-version = "1.0.X" # e.g. "0.4.X", "0.4.5", "v1.0.0" etc.
+version = "1.0.0" # e.g. "0.4.X", "0.4.5", "v1.0.0" etc.
 # site description
 description = "Eric Sephoration 的个人博客，分享技术与生活"
 # site keywords
 keywords = ["blog", "技术博客", "Sephoration", "Eric Sephoration"]
 # site default theme ["light", "dark", "auto"]
-default_theme = "auto"
+default_theme = "dark"
 # which hash function used for SRI, when empty, no SRI is used
 # ["sha256", "sha384", "sha512", "md5"]
 fingerprint = ""
