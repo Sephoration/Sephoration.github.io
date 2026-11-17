@@ -34,8 +34,10 @@ enableRobotsTXT = true
 enableGitInfo = true
 # whether to use emoji code
 enableEmoji = true
+# page render timeout, extended for batch image processing (webp variants)
+timeout = "10m"
 # suppress v1 dev version warning
-ignoreLogs = ['error-get-remote-json']
+ignoreLogs = ['error-get-remote-json', 'warning-dev-env']
 # the main sections of a site
 # if set, the MainSections method on the Site object returns the given sections,
 # otherwise it returns the section with the most pages.
@@ -62,6 +64,14 @@ lastmod = [
 
 [imaging]
 _merge = "shallow"
+
+[imaging.jpeg]
+quality = 75
+
+[imaging.webp]
+quality = 75
+
+[imaging.avif]
 quality = 75
 
 # -------------------------------------------------------------------------------------
@@ -517,7 +527,7 @@ allow_domains = []
 # Image config
 [params.image]
 cache_remote = false
-optimise = false
+optimise = true
 black_list = []
 
 # Code block wrapper config
@@ -569,7 +579,7 @@ layout = "dagre"
 enable = true
 keep_static = false
 auto = true
-position = "right"
+position = "end"
 ordered = false
 start_level = 2
 end_level = 6
@@ -1339,7 +1349,7 @@ object_fit = false
 enable = false
 permalink = "https://github.com/hugo-fixit/FixIt"
 title = "View source on GitHub"
-position = "right"
+position = "end"
 
 # Gravatar config
 [params.gravatar]
@@ -1355,7 +1365,7 @@ scrollpercent = false
 # Reading progress bar
 [params.reading_progress]
 enable = true
-start = "left"
+start = "start"
 position = "top"
 reversed = false
 light = ""

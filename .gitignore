@@ -17,3 +17,7 @@ desktop.ini
 
 # 日志文件
 *.log
+
+# Python 运行生成的缓存
+__pycache__/
+*.pyc

@@ -4,9 +4,10 @@
 
 基于 **Hugo** 的个人技术博客，使用 **FixIt v1** 主题，主题组件以 Git 子模块 + 本地组件方式管理。
 
-- **构建**：Hugo v0.164.0 (extended) + Dart Sass
+- **构建**：Hugo v0.168.0 (extended) + Dart Sass
 - **部署**：GitHub Pages + GitHub Actions（push 到 `main` 自动构建部署）
 - **文章**：`content/posts/`，page bundle 方式（图片与 `index.md` 同目录，相对路径引用）
+- **发布**：源目录写作 + 博客发布器自动搬运（`scripts/publish.py` + `tools/publisher/`），见「日常发布流程」
 
 ---
 
@@ -35,6 +36,63 @@ date: 2026-08-12
 
 图片用相对路径引用：![](图片名.jpg)
 ```
+
+> 推荐用下面「日常发布流程」的源目录方式写作，工具会自动完成以上落地工作。
+
+---
+
+## 日常发布流程（博客发布器）
+
+写作和图片统一放在**源目录**，不用手动碰 `content/posts/`：
+
+- **主目录**（默认 `C:\Users\Eoooo\Desktop\博客大文件夹`）：正式文章，按「分类/章节文件夹」组织
+- **收件箱**（默认 `C:\Users\Eoooo\Desktop\博客收件箱`）：随手写的单篇笔记可直接丢在根下，在 Obsidian 里写完拖过来即可
+
+**源目录约定**
+
+- 两种写法都支持：**一章一个 `.md`** 直接放在分类文件夹里（Obsidian 平铺，推荐），或**一章一个文件夹**（文件夹里只放一个同名 `.md`）
+- 文章在博客里的路径 = 相对源目录的路径（去掉 `.md`），例如 `知识库/操作系统/2、进程管理.md` → `/posts/知识库/操作系统/2、进程管理/`
+- 图片放哪都行，按「md 同目录 → 源根目录 → 全树唯一文件名」顺序找；Obsidian 的 `%20` 编码链接也能识别，带空格的图片名会自动用 `<...>` 包裹链接
+- 两个源里路径撞车时按「来源目录|路径」区分（界面会标「重名」）；选目录时禁止选根目录/盘符第一层，避免扫描整个文件系统
+
+**发布方式**
+
+1. 双击桌面「博客发布器」文件夹里的 **打开发布器.bat** → 浏览器打开管理界面（http://localhost:8765）：勾选发布 / 全部发布 / 干跑预览，可开自动监听；鼠标悬停「文章 / 源文件」可看修改、创建、首发时间（同名文件据此区分）
+2. 桌面「打开博客预览.bat」一键本地预览（http://localhost:1313），「关闭博客预览.bat」关掉
+3. 在 opencode 里：`/draft` 本地预览（不提交）、`/publish` 正式发布上线
+
+**工具自动完成**：搬运文章与图片到 `content/posts/`（md 统一为 `index.md`、图片链接改写为同目录裸文件名、同名自动加后缀）；空图注自动用文件名填充；缺 `date` 自动补「首次发布日」（之后固定不变）；发布前跑全量 Hugo 构建验证，失败自动回滚；通过后自动 `git commit` + `push`，GitHub Actions 自动部署。
+
+**安全规则**：目标目录已存在且不是工具发布的（比如手动放进去的），默认拒绝覆盖，确认要替换才勾选「强制覆盖」（命令行 `--force`）；工具不会删除任何图片文件。
+
+**命令行等价**：`python3 scripts/publish.py`（发布全部待发布/有更新）、`--scan`（只看状态）、`--dry-run`（干跑预览）、`--no-git`（只本地落地预览）、`--select 路径…`（指定篇目，重名时用「来源|路径」）、`--source 目录…`（临时指定源目录）。
+
+---
+
+## 发布器配置与接口（预留）
+
+配置文件 `~/.config/blog-publisher/config.json`（首次运行自动生成，界面「目录设置」也会写这里）：
+
+| 键 | 默认 | 用途 |
+|----|------|------|
+| `source_roots` | 主目录 + 收件箱 | 源目录列表，第一个是主目录，其余是收件箱 |
+| `port` / `preview_port` | 8765 / 1313 | 发布器界面端口 / 本地预览端口 |
+| `watch_interval_sec` | 15 | 界面自动监听刷新间隔（秒） |
+| `branch` | main | 推送分支 |
+| `hugo_bin` / `hugo_args` | 空 | 自定义 hugo 可执行文件与构建参数 |
+| `commit_message_template` | `post: {verb}{title}` | 提交信息模板（{verb}=新增/更新） |
+
+发布清单 `~/.config/blog-publisher/manifest.json` 记录每篇的哈希、原始文件、创建/修改/首发时间、commit 等，用于判断「未发布 / 有更新 / 已发布」，删掉后重新运行会按现状重建。
+
+本地 HTTP 接口（`tools/publisher/app.py`）：
+
+| 接口 | 方法 | 说明 |
+|------|------|------|
+| `/api/scan` | GET | 全量状态（文章列表、错误、未引用图片、计数） |
+| `/api/config` | GET/POST | 读取 / 保存目录设置（Windows 路径自动转换） |
+| `/api/dirs` | GET | 浏览目录（给设置界面用） |
+| `/api/publish` | POST | 触发发布任务（mode: all / select / dry，可 force） |
+| `/api/log` | GET | 增量拉取任务日志与结果 |
 
 ---
 
@@ -98,7 +156,7 @@ date: 2026-08-12
 | 性能与体验 | 暗色模式 | ✅ | 默认暗色（`default_theme=dark`），支持手动切换 |
 | 性能与体验 | 主题配色定制 | ✅ | `[params.appearance]` 全套颜色变量，可自定义主题色 |
 | 性能与体验 | 全局 tooltip | ✅ | `tooltip=true`，元素悬停提示 |
-| 性能与体验 | 图片优化 | ❌ | `[params.image] optimise=false`，可开启 webp/srcset |
+| 性能与体验 | 图片优化 | ✅ | `optimise=true`：自动生成 webp + srcset（800/1200/1600w），灯箱仍看原图 |
 | 性能与体验 | PWA | ❌ | 未启用 |
 | 性能与体验 | 自动书签 | ❌ | `auto_bookmark=false` |
 | 性能与体验 | 到期提醒 | ❌ | `[params.expiration_reminder] enable=false` |
